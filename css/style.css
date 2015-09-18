@@ -1,0 +1,12 @@
+div.game_wrapper {
+    width: 1000px;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p.footer {
+    text-align: center;
+}
