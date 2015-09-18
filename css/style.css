@@ -1,12 +1,23 @@
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
 div.game_wrapper {
+    
     width: 1000px;
     height: 600px;
     margin: 0;
     padding: 0;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 12px;
 }
 
 p.footer {
+    font-family: verdana;
+    color: #7A7A7A;
+    font-size: 10px;
     text-align: center;
 }
