@@ -13,10 +13,12 @@ var target;
 var gameTime = 0; 8
 var updateTime; */
 
+// Number Line Global Variables
+var nl_w = 700;
+var nl_h = 1;
+
 function numberLine_update() {
     numberLine.clear();
-    var nl_w = 700;
-    var nl_h = 1;
     numberLine.lineStyle(2, 0x000000, 1.0);
     numberLine.drawRect(0, 0, nl_w, nl_h);
     for (var i = 0; i <= (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
@@ -36,6 +38,33 @@ function init_numberLine() {
     numberLine_update();
     stage.addChild(numberLine);
 }
+
+// distance formula:
+// d = sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
+// returns an object with the x and y position and the number
+// {x: n, y: n, number: n}
+function numberLine_getClosestNumberPosition(x, y) {
+    var answers = new Array();
+    var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
+    for (var i = 0; i <= (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+        var nl_num = i+problemGenerator.rangeBottom;
+        var nl_x = (i/range)*nl_w + numberLine.x;
+        var nl_y = 20 + numberLine.y;
+        var d = Math.sqrt( (nl_x - x)*(nl_x - x) + (nl_y - y)*(nl_y - y) );
+        answers.push( {distance: d, x: nl_x, y: nl_y, number: nl_num} );
+    }
+    
+    var lowest_index = -1;
+    var lowest_distance = answers[0].distance;
+    for (var i = 0; i < answers.length; i++) {
+        if (answers[i].distance < lowest_distance) {
+            lowest_distance = answers[i].distance;
+            lowest_index = i;
+        }
+    }
+    return answers[lowest_index];
+}
+
 
 function init_problemGenerator() {
     problemGenerator = {
@@ -152,12 +181,10 @@ function init_target(){
             this.dragging = false;
             // set the interaction data to null
             this.data = null;
-        })
-        .on('mouseupoutside', function() {
-            this.alpha = 1;
-            this.dragging = false;
-            // set the interaction data to null
-            this.data = null;
+            var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
+            console.log(snap_object);
+            this.position.x = snap_object.x;
+            this.position.y = snap_object.y;
         })
         // events for drag move
         .on('mousemove', function() {
