@@ -238,9 +238,15 @@ window.onload = function(){
     init_numberLine();
     init_target();
     // start animating
+    var basicText = new PIXI.Text('Place the target on the correct number on the numberline');
+basicText.x = 100;
+basicText.y = 130;
+stage.addChild(basicText);
     animate();
 
 }
+
+
 
 function animate() {
     requestAnimationFrame(animate);
