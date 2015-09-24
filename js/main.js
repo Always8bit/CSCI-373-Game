@@ -20,7 +20,39 @@ function init_problemGenerator() {
         answer: 0,
         difficulty: 0,
         generateNewProblem: function() {
-            // code logic
+            // Difficulty 0
+            if (this.difficulty == 0) {
+                // Answer ranges from -10 to +10
+                this.answer = (Math.floor(Math.random())%20)-10;
+                // First number deviates a max of 4 away +/-
+                this.num1   = (Math.floor(Math.random())%8)-4;
+                // num1 + num2 = answer!
+                this.num2   = answer-num1;
+                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
+                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+            }
+            // Difficulty 1
+            if (this.difficulty == 1) {
+                // Answer ranges from -20 to +20
+                this.answer = (Math.floor(Math.random())%40)-20;
+                // First number deviates a max of 10 away +/-
+                this.num1   = (Math.floor(Math.random())%10)-5;
+                // num1 + num2 = answer!
+                this.num2   = answer-num1;
+                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
+                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+            }
+            // Difficulty 2
+            if (this.difficulty == 2) {
+                // Answer ranges from -40 to +40
+                this.answer = (Math.floor(Math.random())%80)-40;
+                // First number deviates a max of 16 away +/-
+                this.num1   = (Math.floor(Math.random())%16)-8;
+                // num1 + num2 = answer!
+                this.num2   = answer-num1;
+                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
+                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+            }
         },
         setDifficulty: function(n) {
             if (n < 0) {
