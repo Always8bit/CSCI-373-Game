@@ -25,7 +25,7 @@ function numberLine_update() {
         var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
         numberLine.drawRect((i/range)*nl_w, 0, 1, 10);
         var text = new PIXI.Text((i+problemGenerator.rangeBottom),{font : '16px Arial', fill : 0x000000, align : 'center'});
-        text.x = (i/range)*nl_w;
+        text.x = (i/range)*nl_w-4;
         text.y = 20;
         numberLine.addChild(text);
     }
