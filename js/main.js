@@ -29,9 +29,6 @@ window.onload = function(){
     // start animating
     animate();
     
-/* //create a timer for future use
-    gameTimer = setInterval(updateTime, 1000);*/
-
 }
 
 
