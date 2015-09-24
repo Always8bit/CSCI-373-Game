@@ -14,7 +14,7 @@ var gameTime = 0; 8
 var updateTime; */
 
 // Number Line Global Variables
-var nl_w = 650;
+var nl_w = 550;
 var nl_h = 1;
 
 function numberLine_update() {
@@ -33,7 +33,7 @@ function numberLine_update() {
 
 function init_numberLine() {
     numberLine = new PIXI.Graphics();
-    numberLine.x = 10;
+    numberLine.x = 50;
     numberLine.y = 555;
     numberLine_update();
     stage.addChild(numberLine);
