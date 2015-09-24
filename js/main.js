@@ -1,7 +1,6 @@
 // Display Variables
 var stage;
 var renderer;
-var equationText;
 // Object Variables
 var tower;
 var robot;
@@ -54,20 +53,22 @@ function init_equationbox() {
 	equationBox.position.x=500;
 	equationBox.position.y=100;
 	stage.addChild(equationBox);    
+    equationText = PIXI.Text(problemGenerator.num1 + " + " + problemGenerator.num2, 
+        {font: "24px Arial", fill: 0x000000});
 }
+
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
     // create the root of the scene graph
     stage = new PIXI.Container();
     // init stage
+    init_problemGenerator();
     init_tower();
     init_robot();
     init_equationbox();
     // start animating
     animate();
-    
-    equationText = PIXI.Text(problemGenerator.num1 "+" problemGenerator.num2, [Arial])
 }
 
 
