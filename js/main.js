@@ -1,6 +1,7 @@
 var stage;
 var renderer;
 var tower;
+var robot;
 
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
@@ -11,6 +12,10 @@ window.onload = function(){
     tower.position.x=800;
     tower.position.y=300;
     stage.addChild(tower);
+	robot = PIXI.Sprite.fromImage('images/robot.png');
+	robot.position.x=-50;
+	robot.position.y=500;
+	stage.addChild(robot);
     // start animating
     animate();
 }
