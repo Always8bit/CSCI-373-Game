@@ -1,7 +1,7 @@
 // Display Variables
 var stage;
 var renderer;
-
+var equationText;
 // Object Variables
 var tower;
 var robot;
@@ -13,7 +13,7 @@ var gameTime = 0; 8
 var updateTime; */
 
 function init_problemGenerator() {
-    problem_generator = {
+    problemGenerator = {
         rangeBottom: 0,
         rangeTop: 0,
         num1: 0,
@@ -67,9 +67,7 @@ window.onload = function(){
     // start animating
     animate();
     
-/* //create a timer for future use
-    gameTimer = setInterval(updateTime, 1000);*/
-
+    equationText = PIXI.Text(problemGenerator.num1 "+" problemGenerator.num2, [Arial])
 }
 
 
