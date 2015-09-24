@@ -6,10 +6,35 @@ var tower;
 var robot;
 var equationBox;
 var problemGenerator;
+var numberLine;
 
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
+
+function numberLine_update() {
+    numberLine.clear();
+    var nl_w = 700;
+    var nl_h = 1;
+    numberLine.lineStyle(2, 0x000000, 1.0);
+    numberLine.drawRect(0, 0, nl_w, nl_h);
+    for (var i = 0; i <= (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+        var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
+        numberLine.drawRect((i/range)*nl_w, 0, 1, 10);
+        var text = new PIXI.Text((i+problemGenerator.rangeBottom),{font : '12px Arial', fill : 0x000000, align : 'center'});
+        text.x = (i/range)*nl_w;
+        text.y = 20;
+        numberLine.addChild(text);
+    }
+}
+
+function init_numberLine() {
+    numberLine = new PIXI.Graphics();
+    numberLine.x = 20;
+    numberLine.y = 540;
+    numberLine_update();
+    stage.addChild(numberLine);
+}
 
 function init_problemGenerator() {
     problemGenerator = {
@@ -22,36 +47,36 @@ function init_problemGenerator() {
         generateNewProblem: function() {
             // Difficulty 0
             if (this.difficulty == 0) {
-                // Answer ranges from -10 to +10
-                this.answer = (Math.floor(Math.random())%20)-10;
+                // Answer ranges from -5 to +5
+                this.answer = (Math.floor(Math.random()*10))-5;
                 // First number deviates a max of 4 away +/-
-                this.num1   = (Math.floor(Math.random())%8)-4;
+                this.num1   = (Math.floor(Math.random()*8))-4;
                 // num1 + num2 = answer!
-                this.num2   = answer-num1;
-                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
-                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+                this.num2   = this.answer-this.num1;
+                this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*2));
+                this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*2));
             }
             // Difficulty 1
             if (this.difficulty == 1) {
                 // Answer ranges from -20 to +20
-                this.answer = (Math.floor(Math.random())%40)-20;
+                this.answer = (Math.floor(Math.random()*40))-20;
                 // First number deviates a max of 10 away +/-
-                this.num1   = (Math.floor(Math.random())%10)-5;
+                this.num1   = (Math.floor(Math.random()*10))-5;
                 // num1 + num2 = answer!
-                this.num2   = answer-num1;
-                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
-                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+                this.num2   = this.answer-this.num1;
+                this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
+                this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
             }
             // Difficulty 2
             if (this.difficulty == 2) {
                 // Answer ranges from -40 to +40
-                this.answer = (Math.floor(Math.random())%80)-40;
+                this.answer = (Math.floor(Math.random()*80))-40;
                 // First number deviates a max of 16 away +/-
-                this.num1   = (Math.floor(Math.random())%16)-8;
+                this.num1   = (Math.floor(Math.random()*80))-8;
                 // num1 + num2 = answer!
-                this.num2   = answer-num1;
-                this.rangeBottom = min(answer, num1, num2)-(Math.floor(Math.random())%4);
-                this.rangeTop    = max(answer, num1, num2)+(Math.floor(Math.random())%4);
+                this.num2   = this.answer-this.num1;
+                this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
+                this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
             }
         },
         setDifficulty: function(n) {
@@ -96,9 +121,13 @@ window.onload = function(){
     stage = new PIXI.Container();
     // init stage
     init_problemGenerator();
+    problemGenerator.setDifficulty(0);
+    problemGenerator.generateNewProblem();
+    init_numberLine();
     init_tower();
     init_robot();
     init_equationbox();
+    init_numberLine();
     // start animating
     animate();
 
