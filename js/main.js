@@ -142,12 +142,18 @@ function equationBox_update() {
     equationBox.clear();
     var eqb_w = 600;
     var eqb_h = 100;
+    // background box
     equationBox.beginFill(0x333333, 1.0);
     equationBox.lineStyle(2, 0x000000, 1.0);
     equationBox.drawRect(0, 0, eqb_w, eqb_h);
+    // two number boxes
     equationBox.beginFill(0xFFFFFF, 1.0);
     equationBox.drawRect(10, 10, eqb_h-20, eqb_h-20);
     equationBox.drawRect(150, 10, eqb_h-20, eqb_h-20);
+    // plus symbol
+    equationBox.lineStyle(0, 0x000000, 0.0);
+    equationBox.drawRect(117,36,5,30);
+    equationBox.drawRect(104,48,30,5);
     var n1 = new PIXI.Text(problemGenerator.num1,{font : '28px Arial', fill : 0x000000, align : 'center'});
     var n2 = new PIXI.Text(problemGenerator.num2,{font : '28px Arial', fill : 0x000000, align : 'center'});
     n1.x = 38;
@@ -189,6 +195,9 @@ function init_target(){
                 this.position.x = snap_object.x;
                 this.position.y = snap_object.y;    
             }
+            if (snap_object.number == problemGenerator.answer) {
+                win_screen();
+            }
         })
         // events for drag move
         .on('mousemove', function() {
@@ -204,6 +213,13 @@ function init_target(){
     target.position.y = 80;
     
     stage.addChild(target);
+}
+
+function win_screen() {
+    var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
+    win_text.x = 440;
+    win_text.y = 240;
+    stage.addChild(win_text);
 }
 
 window.onload = function(){
