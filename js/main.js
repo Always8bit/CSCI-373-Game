@@ -14,7 +14,7 @@ var gameTime = 0; 8
 var updateTime; */
 
 // Number Line Global Variables
-var nl_w = 700;
+var nl_w = 600;
 var nl_h = 1;
 
 function numberLine_update() {
@@ -33,7 +33,7 @@ function numberLine_update() {
 
 function init_numberLine() {
     numberLine = new PIXI.Graphics();
-    numberLine.x = 20;
+    numberLine.x = 10;
     numberLine.y = 555;
     numberLine_update();
     stage.addChild(numberLine);
@@ -126,8 +126,8 @@ function init_problemGenerator() {
 
 function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
-    tower.position.x=800;
-    tower.position.y=300;
+    tower.position.x=-220;
+    tower.position.y=260;
     stage.addChild(tower);
 }
 
@@ -193,7 +193,7 @@ function init_target(){
             var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
             if (snap_object != -1) {
                 this.position.x = snap_object.x;
-                this.position.y = snap_object.y;    
+                this.position.y = snap_object.y-15;    
             }
             if (snap_object.number == problemGenerator.answer) {
                 win_screen();
@@ -209,8 +209,8 @@ function init_target(){
             }
         });
     // move the sprite to its designated position
-    target.position.x = 530;
-    target.position.y = 80;
+    target.position.x = 522;
+    target.position.y = 90;
     
     stage.addChild(target);
 }
