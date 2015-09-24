@@ -8,6 +8,7 @@ var equationBox;
 var problemGenerator;
 var numberLine;
 var target;
+var background;
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -252,12 +253,20 @@ function init_instructions() {
     stage.addChild(basicText);
 }
 
+function init_background() {
+    background = PIXI.Sprite.fromImage('images/background1.png');
+    background.x = 0;
+    background.y = 0;
+    stage.addChild(background);
+}
+
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
     // create the root of the scene graph
     stage = new PIXI.Container();
     // init stage
+    init_background();
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
