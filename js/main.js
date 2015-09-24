@@ -1,13 +1,12 @@
 var stage;
 var renderer;
 var equationText;
-/*var gameTimer;
-var gameTime = 0; 8
-var updateTime; */
 
 var tower;
 var robot;
 var equationBox;
+var numOne = -7;
+var numTwo = 8;
 
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
@@ -29,6 +28,7 @@ window.onload = function(){
     // start animating
     animate();
     
+    equationText = PIXI.Text(numOne "+" numTwo, [Arial])
 }
 
 
