@@ -39,6 +39,18 @@ function init_numberLine() {
     stage.addChild(numberLine);
 }
 
+function numberLine_coordiniates(number) {
+    for (var i = 0; i < (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+        var nl_num = i+problemGenerator.rangeBottom;
+        var nl_x = (i/range)*nl_w + numberLine.x;
+        var nl_y = numberLine.y;
+        if (nl_num == number) {
+            return {x: nl_x, y: nl_y};
+        }
+    }
+    return -1;
+}
+
 // distance formula:
 // d = sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
 // returns an object with the x and y position and the number
