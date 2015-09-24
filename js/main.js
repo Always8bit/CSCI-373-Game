@@ -43,7 +43,12 @@ window.onload = function(){
     // start animating
     animate();
     
-    equationText = PIXI.Text(numOne "+" numTwo, [Arial])
+    equationText = PIXI.Text(numOne "   +   " numTwo, [bold 28px Arial], [fill='white'])
+
+    //not sure about this
+    equationText.anchor.x = 500/3;
+    equationText.anchor.y = 100/2;
+
 }
 
 
