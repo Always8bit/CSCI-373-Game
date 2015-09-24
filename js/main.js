@@ -14,7 +14,7 @@ var gameTime = 0; 8
 var updateTime; */
 
 // Number Line Global Variables
-var nl_w = 600;
+var nl_w = 650;
 var nl_h = 1;
 
 function numberLine_update() {
@@ -126,7 +126,7 @@ function init_problemGenerator() {
 
 function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
-    tower.position.x=-220;
+    tower.position.x=-165;
     tower.position.y=260;
     stage.addChild(tower);
 }
@@ -222,6 +222,13 @@ function win_screen() {
     stage.addChild(win_text);
 }
 
+function init_instructions() {
+    var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0x000000, align : 'center'});
+    basicText.x = 20;
+    basicText.y = 115;
+    stage.addChild(basicText);
+}
+
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
@@ -238,10 +245,7 @@ window.onload = function(){
     init_numberLine();
     init_target();
     // start animating
-    var basicText = new PIXI.Text('Place the target on the correct number on the numberline');
-basicText.x = 100;
-basicText.y = 130;
-stage.addChild(basicText);
+    init_instructions();
     animate();
 
 }
