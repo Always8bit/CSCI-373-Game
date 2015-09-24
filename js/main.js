@@ -54,7 +54,7 @@ function numberLine_getClosestNumberPosition(x, y) {
         answers.push( {distance: d, x: nl_x, y: nl_y, number: nl_num} );
     }
     
-    var lowest_index = -1;
+    var lowest_index = 0;
     var lowest_distance = answers[0].distance;
     for (var i = 0; i < answers.length; i++) {
         if (answers[i].distance < lowest_distance) {
