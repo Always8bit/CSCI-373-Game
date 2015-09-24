@@ -7,6 +7,7 @@ var robot;
 var equationBox;
 var problemGenerator;
 var numberLine;
+var target;
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -133,6 +134,47 @@ function init_equationbox() {
     stage.addChild(equationBox);
 }
 
+function init_target(){
+    target = PIXI.Sprite.fromImage('images/target.png');
+    target.interactive = true;
+    target.buttonMode = true;
+    target.anchor.set(0.5);
+    target
+        // events for drag start
+        .on('mousedown', function(event) {
+            this.data = event.data;
+            this.alpha = 0.5;
+            this.dragging = true;
+        })
+        // events for drag end
+        .on('mouseup', function() {
+            this.alpha = 1;
+            this.dragging = false;
+            // set the interaction data to null
+            this.data = null;
+        })
+        .on('mouseupoutside', function() {
+            this.alpha = 1;
+            this.dragging = false;
+            // set the interaction data to null
+            this.data = null;
+        })
+        // events for drag move
+        .on('mousemove', function() {
+            if (this.dragging)
+            {
+                var newPosition = this.data.getLocalPosition(this.parent);
+                this.position.x = newPosition.x;
+                this.position.y = newPosition.y;
+            }
+        });
+    // move the sprite to its designated position
+    target.position.x = 530;
+    target.position.y = 80;
+    
+    stage.addChild(target);
+}
+
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
@@ -147,73 +189,11 @@ window.onload = function(){
     init_robot();
     init_equationbox();
     init_numberLine();
-    target(800,100);
+    init_target();
     // start animating
     animate();
 
 }
-
-function target(x,y){
-var target = PIXI.Sprite.fromImage('images/target.png');
-    
-    target.interactive = true;
-    target.buttonMode = true;
-    target.anchor.set(0.5);
-    target
-        // events for drag start
-        .on('mousedown', onDragStart)
-        .on('touchstart', onDragStart)
-        // events for drag end
-        .on('mouseup', onDragEnd)
-        .on('mouseupoutside', onDragEnd)
-        .on('touchend', onDragEnd)
-        .on('touchendoutside', onDragEnd)
-        // events for drag move
-        .on('mousemove', onDragMove)
-        .on('touchmove', onDragMove);
-
-    // move the sprite to its designated position
-    
-    target.position.x = x;
-    target.position.y = y;
-    
-    stage.addChild(target);
-}
-
-requestAnimationFrame( animate );
-
-
-function onDragStart(event)
-{
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
-}
-
-function onDragEnd()
-{
-    this.alpha = 1;
-
-    this.dragging = false;
-
-    // set the interaction data to null
-    this.data = null;
-}
-
-function onDragMove()
-{
-    if (this.dragging)
-    {
-        var newPosition = this.data.getLocalPosition(this.parent);
-        this.position.x = newPosition.x;
-        this.position.y = newPosition.y;
-    }
-}
-
-
 
 function animate() {
     requestAnimationFrame(animate);
