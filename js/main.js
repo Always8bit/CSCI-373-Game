@@ -6,12 +6,34 @@ var renderer;
 var tower;
 var robot;
 var equationBox;
-
+var problemGenerator;
 
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
 
+function init_problemGenerator() {
+    problem_generator = {
+        rangeBottom: 0,
+        rangeTop: 0,
+        num1: 0,
+        num2: 0,
+        answer: 0,
+        difficulty: 0,
+        generateNewProblem: function() {
+            // code logic
+        }
+        setDifficulty: function(n) {
+            if (n < 0) {
+                this.difficulty = 0;
+            } else if (n > 2) {
+                this.difficulty = 2;
+            } else {
+                this.difficulty = n;
+            }
+        }
+    }
+}
 
 function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
