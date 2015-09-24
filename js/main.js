@@ -1,13 +1,17 @@
+// Display Variables
 var stage;
 var renderer;
-var equationText;
+
+// Object Variables
+var tower;
+var robot;
+var equationBox;
+
+
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
 
-var tower;
-var robot;
-var equationBox;
 
 function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
