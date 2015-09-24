@@ -205,10 +205,12 @@ function init_target(){
             var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
             if (snap_object != -1) {
                 this.position.x = snap_object.x;
-                this.position.y = snap_object.y-15;    
-            }
-            if (snap_object.number == problemGenerator.answer) {
-                win_screen();
+                this.position.y = snap_object.y-15;
+                if (snap_object.number == problemGenerator.answer) {
+                    win_screen();
+                } else{
+                    lose_screen();
+              }
             }
         })
         // events for drag move
@@ -233,6 +235,15 @@ function win_screen() {
     win_text.y = 240;
     stage.addChild(win_text);
 }
+
+function lose_screen(){
+    var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
+'center'});
+    lose_text.x = 440;
+    lose_text.y = 240;
+    stage.addChild(lose_text);
+}
+
 
 function init_instructions() {
     var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0x000000, align : 'center'});
