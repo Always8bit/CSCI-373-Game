@@ -22,7 +22,7 @@ function init_problemGenerator() {
         difficulty: 0,
         generateNewProblem: function() {
             // code logic
-        }
+        },
         setDifficulty: function(n) {
             if (n < 0) {
                 this.difficulty = 0;
