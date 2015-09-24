@@ -16,7 +16,7 @@ var updateTime; */
 // Number Line Global Variables
 var nl_w = 600;
 var nl_h = 1;
-//test
+
 function numberLine_update() {
     numberLine.clear();
     numberLine.lineStyle(2, 0x000000, 1.0);
