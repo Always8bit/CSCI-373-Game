@@ -62,6 +62,9 @@ function numberLine_getClosestNumberPosition(x, y) {
             lowest_index = i;
         }
     }
+    if (lowest_distance > 50) {
+        return -1;
+    }
     return answers[lowest_index];
 }
 
@@ -182,9 +185,10 @@ function init_target(){
             // set the interaction data to null
             this.data = null;
             var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
-            console.log(snap_object);
-            this.position.x = snap_object.x;
-            this.position.y = snap_object.y;
+            if (snap_object != -1) {
+                this.position.x = snap_object.x;
+                this.position.y = snap_object.y;    
+            }
         })
         // events for drag move
         .on('mousemove', function() {
