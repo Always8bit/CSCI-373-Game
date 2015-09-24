@@ -82,8 +82,8 @@ function init_robot() {
 
 function init_equationbox() {
     equationBox = PIXI.Sprite.fromImage('images/EquationBox.png');
-	equationBox.position.x=500;
-	equationBox.position.y=100;
+	equationBox.position.x=100;
+	equationBox.position.y=50;
 	stage.addChild(equationBox);    
     equationText = PIXI.Text(problemGenerator.num1 + " + " + problemGenerator.num2, 
         {font: "24px Arial", fill: 0x000000});
