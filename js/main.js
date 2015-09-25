@@ -140,7 +140,7 @@ function init_problemGenerator() {
 function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
     tower.position.x=-165;
-    tower.position.y=260;
+    tower.position.y=261;
     stage.addChild(tower);
 }
 
