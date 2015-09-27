@@ -8,6 +8,7 @@ var equationBox;
 var problemGenerator;
 var numberLine;
 var target;
+var launchButton;
 var background;
 
 /*var gameTimer;
@@ -151,6 +152,10 @@ function init_robot() {
     stage.addChild(robot);
 }
 
+function init_launch_button() {
+
+}
+
 function equationBox_update() {
     equationBox.clear();
     var eqb_w = 600;
@@ -163,6 +168,12 @@ function equationBox_update() {
     equationBox.beginFill(0xFFFFFF, 1.0);
     equationBox.drawRect(10, 10, eqb_h-20, eqb_h-20);
     equationBox.drawRect(150, 10, eqb_h-20, eqb_h-20);
+    //launch button
+    equationBox.beginFill(0xFFCC11, 1.0);
+    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
+    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
+    launch_text.x = 281;
+    launch_text.y = 20;
     // plus symbol
     equationBox.lineStyle(0, 0x000000, 0.0);
     equationBox.drawRect(117,36,5,30);
@@ -175,6 +186,7 @@ function equationBox_update() {
     n2.y = 35;
     equationBox.addChild(n1);
     equationBox.addChild(n2);
+    equationBox.addChild(launch_text);
 }
 
 function init_equationbox() {
