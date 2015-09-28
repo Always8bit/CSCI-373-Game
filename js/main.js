@@ -14,7 +14,7 @@ var background;
 var user_answer;
 
 // Animation Variables
-var robotAnimation; // 0 initial, 1 moveToPostion, 2 selfdestruct, 3 attack
+var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -193,6 +193,14 @@ function robot_attack(){
 	}
 }
 
+function init_missile() {
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=770;
+	missile.position.y=225;
+	stage.addChild(missile);
+}
+
+
 
 function equationBox_update() {
     equationBox.clear();
@@ -280,12 +288,10 @@ function init_target(){
         .on('click', function(event) {
             this.data = event.data;
 			robotAnimation = 1;
-            robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
-                //robot explode animate
+                //robot explode animate yay
                 robotAnimation = 2;
-                //start new problem
                 
             } else {
                 robotAnimation = 3;
