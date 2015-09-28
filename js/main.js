@@ -274,16 +274,13 @@ function init_target(){
         .on('click', function(event) {
             this.data = event.data;
 			robotAnimation = 1;
-            robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
                 //robot explode animate
                 robotAnimation = 2;
-                robot_moveToPosition();
                 
             } else {
                 robotAnimation = 3;
-                robot_moveToPosition();
             }
         })
     
