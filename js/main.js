@@ -250,8 +250,8 @@ function init_target(){
 }
 
 
-/*  function init_launch_button() {
-    launch_button
+  function init_launch_button() {
+/*    launch_button
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
@@ -268,7 +268,8 @@ function init_target(){
         })
     
     stage.addChild(launch_button);
-} */
+    */
+} 
 
 
 function win_screen() {
