@@ -277,11 +277,12 @@ function init_target(){
             robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
-               
-                //start a new problem
-                equationBox_update();
-            } else {
+                //robot explode animate
                 robotAnimation = 2;
+                //start new problem
+                
+            } else {
+                robotAnimation = 3;
             }
         })
     
