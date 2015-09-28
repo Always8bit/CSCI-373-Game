@@ -279,10 +279,11 @@ function init_target(){
             {
                 //robot explode animate
                 robotAnimation = 2;
-                //start new problem
+                robot_moveToPosition();
                 
             } else {
                 robotAnimation = 3;
+                robot_moveToPosition();
             }
         })
     
