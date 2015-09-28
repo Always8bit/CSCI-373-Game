@@ -375,9 +375,13 @@ function buttonGenerator(x, y, width, height, color, elevation, speed, text, cli
             if (Math.round(button_top.x) == 0) {
                 clearInterval(interval_variable); 
             }
+            if (button_top.x > 0) {button_top.x = 0;}
+            if (button_top.y > 0) {button_top.y = 0;}
         }, 20);
     })
     .on('mouseup', function(event) {
+        button_top.x = 0;
+        button_top.y = 0;
         clearInterval(interval_variable);
         interval_variable = setInterval(function(){
             var range = button_top.x - elevation;
