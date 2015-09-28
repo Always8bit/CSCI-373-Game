@@ -274,6 +274,81 @@ function init_background() {
     stage.addChild(background);
 }
 
+
+function buttonGenerator(x, y, width, height, color, elevation, speed, text, clickedFunction) {
+    var button = new PIXI.Graphics();
+    var button_top_gfx = new PIXI.Graphics();
+    var button_bottom = new PIXI.Graphics();
+    
+    var interval_variable; 
+    
+    button_top_gfx.beginFill(color, 1.0);
+    button_bottom.beginFill(buttonGenerator_darknessHalved(color), 1.0);
+    button_top_gfx.drawRect(0, 0, width, height);
+    button_bottom.drawRect(0, 0, width, height);
+        
+    var button_top_tex = button_top_gfx.generateTexture();
+    var button_top = new PIXI.Sprite(button_top_tex);
+
+    var text_gfx = new PIXI.Text(text,{font : '28px Arial', fill : 0x000000, align : 'center'});
+    text_gfx.x = 0;
+    text_gfx.y = 0;
+    button_top.addChild(text_gfx);
+    
+    button.addChild(button_bottom);
+    button.addChild(button_top);
+    button_top.x = 0-elevation;
+    button_top.y = 0-elevation;
+    button_bottom.x = 0;
+    button_bottom.y = 0;
+    button.x = x;
+    button.y = y;
+    button_top.interactive = true;
+    button_top.buttonMode = true;
+    button_top
+    .on('mousedown', function(event) {
+        clearInterval(interval_variable);
+        interval_variable = setInterval(function(){
+            var range = elevation - button_top.x;
+            range *= speed;
+            button_top.x += range;
+            button_top.y += range;
+            if (Math.round(button_top.x) == 0) {
+                clearInterval(interval_variable); 
+            }
+        }, 20);
+    })
+    .on('mouseup', function(event) {
+        clearInterval(interval_variable);
+        interval_variable = setInterval(function(){
+            var range = button_top.x - elevation;
+            range *= speed;
+            button_top.x += range;
+            button_top.y += range;
+            if (Math.round(button_top.x) < -elevation) {
+                clearInterval(interval_variable); 
+                button_top.x = -elevation;
+                button_top.y = -elevation;
+            }
+        }, 20);
+        clickedFunction();
+    });
+    return button;
+}
+
+function buttonGenerator_darknessHalved(color) {
+    var red   = (color >>> 16)&0xFF;
+    var green = (color >>>  8)&0xFF;
+    var blue  = (color >>>  0)&0xFF;
+    red   = Math.floor(red/2);
+    green = Math.floor(green/2);
+    blue  = Math.floor(blue/2);
+    red   = (red   << 16)&0xFF0000;
+    green = (green <<  8)&0x00FF00;
+    blue  = (blue  <<  0)&0x0000FF;
+    return red|green|blue;
+}
+
 window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
@@ -290,14 +365,15 @@ window.onload = function(){
     init_equationbox();
     init_numberLine();
     init_target();
-    // start animating
     init_instructions();
-	
+    // start animating
+
+    stage.addChild(buttonGenerator(500, 300, 100, 50, 0xAAAAFF, 5, 0.3, "test", function () {
+        console.log("hey nice");
+    }));
     animate();
 
 }
-
-
 
 function animate() {
     requestAnimationFrame(animate);
@@ -306,6 +382,5 @@ function animate() {
     renderer.render(stage);
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
 				robot.x += 5;
-	}
-	
+	}	
 }
