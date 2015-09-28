@@ -264,12 +264,7 @@ function init_target(){
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
-<<<<<<< HEAD
 			robotAnimation = 1;
-            //button generator here?
-=======
-            
->>>>>>> origin/master
             robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
