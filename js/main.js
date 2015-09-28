@@ -251,6 +251,7 @@ function init_target(){
             robot_move.animate();
             //tell missile to launch
             missile_launch.animate();
+            }
         })
     
     stage.addChild(launch_button);
