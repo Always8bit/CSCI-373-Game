@@ -276,7 +276,7 @@ function init_target(){
 			robotAnimation = 1;
             if (problemGenerator.answer == user_answer) 
             {
-                //robot explode animate
+                //robot explode animate yay
                 robotAnimation = 2;
                 
             } else {
