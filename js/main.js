@@ -13,7 +13,7 @@ var launch_button;
 var background;
 var user_answer;
 
-// Robot Animation Variables
+// Animation Variables
 var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
 var robotIntervalVariable;
 var robotAnimationFrame;
@@ -197,7 +197,7 @@ function robot_attack(){
 }
 
 function robot_animationIdle() {
-    robot.texture = PIXI.Texture.fromImage("images/robot/" + robotAnimationFrame + ".png");
+    robot.texture = PIXI.Texture.fromImage("images/robot/idle/" + robotAnimationFrame + ".png");
     robotAnimationFrame++;
     robotAnimationFrame = robotAnimationFrame%2;
 }
