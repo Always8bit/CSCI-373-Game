@@ -13,6 +13,9 @@ var launch_button;
 var background;
 var user_answer;
 
+// Animation Variables
+var robotAnimation;
+
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
@@ -154,9 +157,11 @@ function init_tower() {
 
 function init_robot() {
     robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=-50;
+    robot.position.x=50;
     robot.position.y=500;
+	robotAnimation = 0;
     stage.addChild(robot);
+	
 }
 
 function init_missile() {
@@ -166,13 +171,11 @@ function init_missile() {
 	stage.addChild(missile);
 }
 
-function init_launch_button() {
-    equationBox.beginFill(0xFFCC11, 1.0);
-    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
-    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
-    launch_text.x = 281;
-    launch_text.y = 20;
-    equationBox.addChild(launch_text);
+function robot_moveToPosition(){
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
+    {
+        robot.x += 5;
+	}
 }
 
 
@@ -256,18 +259,24 @@ function init_target(){
 }
 
 
-/* function init_launch_button() {
-    launch_button
+  function init_launch_button() {
+ /*   launch_button
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
-            //compare problemGenerator.answer with snap_object.number?
-            //tell robot to animate
-            //tell missile to launch
+            //button generator here?
+            robot_moveToPosition();
+            if (problemGenerator.answer == user_answer) 
+            {
+               
+                //start a new problem
+                equationBox_update();
+            }
         })
     
     stage.addChild(launch_button);
-} */
+   */ 
+} 
 
 
 function win_screen() {
@@ -330,10 +339,8 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 
+	robot_moveToPosition();
     // render the container
     renderer.render(stage);
-	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
-				robot.x += 5;
-	}
 	
 }
