@@ -239,23 +239,25 @@ function init_target(){
 }
 
 
- function init_launch_button() {
+/*  function init_launch_button() {
     launch_button
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
-            //button generator?
+            //button generator here?
             if (problemGenerator.answer == user_answer) 
             {
-            //tell robot to animate
-            robot_move.animate();
-            //tell missile to launch
-            missile_launch.animate();
+                //tell robot to animate
+                robot_move.animate();
+                //tell missile to launch
+                missile_launch.animate();
+                //start a new problem
+                equationBox_update();
             }
         })
     
     stage.addChild(launch_button);
-} 
+} */
 
 
 function win_screen() {
