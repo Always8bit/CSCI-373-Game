@@ -8,8 +8,9 @@ var equationBox;
 var problemGenerator;
 var numberLine;
 var target;
-var launchButton;
+var launch_button;
 var background;
+var user_answer;
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -152,10 +153,6 @@ function init_robot() {
     stage.addChild(robot);
 }
 
-function init_launch_button() {
-
-}
-
 function equationBox_update() {
     equationBox.clear();
     var eqb_w = 600;
@@ -216,6 +213,7 @@ function init_target(){
             // set the interaction data to null
             this.data = null;
             var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
+            user_answer = snap_object;
             if (snap_object != -1) {
                 this.position.x = snap_object.x;
                 this.position.y = snap_object.y-15;
@@ -241,6 +239,21 @@ function init_target(){
     
     stage.addChild(target);
 }
+
+
+/* function init_launch_button() {
+    launch_button
+        //event for clicking the launch button
+        .on('click', function(event) {
+            this.data = event.data;
+            //compare problemGenerator.answer with snap_object.number?
+            //tell robot to animate
+            //tell missile to launch
+        })
+    
+    stage.addChild(launch_button);
+} */
+
 
 function win_screen() {
     var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
@@ -290,6 +303,7 @@ window.onload = function(){
     init_target();
     // start animating
     init_instructions();
+    init_launch_button();
     animate();
 
 }
