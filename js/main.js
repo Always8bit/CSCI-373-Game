@@ -147,7 +147,7 @@ function init_tower() {
 
 function init_robot() {
     robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=-50;
+    robot.position.x=50;
     robot.position.y=500;
     stage.addChild(robot);
 }
@@ -290,6 +290,7 @@ window.onload = function(){
     init_target();
     // start animating
     init_instructions();
+	
     animate();
 
 }
@@ -301,4 +302,8 @@ function animate() {
 
     // render the container
     renderer.render(stage);
+	if(robot.x <= 700){
+				robot.x += 5;
+			}
+	
 }
