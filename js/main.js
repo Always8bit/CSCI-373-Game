@@ -19,6 +19,8 @@ var robotAnimation;
 var gameTime = 0; 8
 var updateTime; */
 
+var lives;
+
 // Number Line Global Variables
 var nl_w = 550;
 var nl_h = 1;
@@ -262,6 +264,7 @@ function init_target(){
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
+			robotAnimation = 1;
             //button generator here?
             robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
