@@ -170,6 +170,12 @@ function robot_moveToPosition(){
 	}
 }
 
+function robot_attack(){
+	if(robot.x <= 1000){
+		robot.x += 10;
+	}
+}
+
 
 function equationBox_update() {
     equationBox.clear();
@@ -331,6 +337,7 @@ function animate() {
     requestAnimationFrame(animate);
 
 	robot_moveToPosition();
+	robot_attack();
     // render the container
     renderer.render(stage);
 	
