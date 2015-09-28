@@ -262,7 +262,7 @@ function init_target(){
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
-            //button generator here?
+            
             robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
