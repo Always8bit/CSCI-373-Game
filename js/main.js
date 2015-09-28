@@ -248,9 +248,9 @@ function init_target(){
             if (problemGenerator.answer == user_answer) 
             {
                 //tell robot to animate
-                robot_move.animate();
+                
                 //tell missile to launch
-                missile_launch.animate();
+               
                 //start a new problem
                 equationBox_update();
             }
