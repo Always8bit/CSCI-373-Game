@@ -166,6 +166,19 @@ function init_robot() {
 	
 }
 
+function init_missile() {
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=770;
+	missile.position.y=225;
+	stage.addChild(missile);
+}
+
+function missile_moveToPosition(){
+	if(missile.y >= -100){
+		missile.y -= 7;
+	}	
+}	
+
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
     {
@@ -426,7 +439,7 @@ window.onload = function(){
 
 function animate() {
     requestAnimationFrame(animate);
-
+	missile_moveToPosition();
 	robot_moveToPosition();
 	robot_attack();
     // render the container
