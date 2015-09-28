@@ -4,6 +4,7 @@ var renderer;
 // Object Variables
 var tower;
 var robot;
+var missile;
 var equationBox;
 var problemGenerator;
 var numberLine;
@@ -158,6 +159,13 @@ function init_robot() {
     stage.addChild(robot);
 }
 
+function init_missile() {
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=770;
+	missile.position.y=225;
+	stage.addChild(missile);
+}
+
 function init_launch_button() {
     equationBox.beginFill(0xFFCC11, 1.0);
     equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
@@ -304,6 +312,7 @@ window.onload = function(){
     problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
+	init_missile();
     init_robot();
     init_equationbox();
     init_numberLine();
