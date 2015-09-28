@@ -4,16 +4,23 @@ var renderer;
 // Object Variables
 var tower;
 var robot;
+var missile;
 var equationBox;
 var problemGenerator;
 var numberLine;
 var target;
-var launchButton;
+var launch_button;
 var background;
+var user_answer;
+
+// Animation Variables
+var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
 
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
+
+var lives;
 
 // Number Line Global Variables
 var nl_w = 550;
@@ -152,19 +159,35 @@ function init_tower() {
 
 function init_robot() {
     robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=-50;
+    robot.position.x=50;
     robot.position.y=500;
+	robotAnimation = 0;
     stage.addChild(robot);
+	
 }
 
-function init_launch_button() {
-    equationBox.beginFill(0xFFCC11, 1.0);
-    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
-    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
-    launch_text.x = 281;
-    launch_text.y = 20;
-    equationBox.addChild(launch_text);
+function robot_moveToPosition(){
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
+    {
+        robot.x += 5;
+	}
 }
+
+function robot_attack(){
+	if(robot.x <= 1000){
+		robot.x += 10;
+		lives -= 1;
+	}
+}
+
+function init_missile() {
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=770;
+	missile.position.y=225;
+	stage.addChild(missile);
+}
+
+
 
 function equationBox_update() {
     equationBox.clear();
@@ -218,6 +241,7 @@ function init_target(){
             // set the interaction data to null
             this.data = null;
             var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
+            user_answer = snap_object;
             if (snap_object != -1) {
                 this.position.x = snap_object.x;
                 this.position.y = snap_object.y-15;
@@ -243,6 +267,28 @@ function init_target(){
     
     stage.addChild(target);
 }
+
+
+  function init_launch_button() {
+ /*   launch_button
+        //event for clicking the launch button
+        .on('click', function(event) {
+            this.data = event.data;
+			robotAnimation = 1;
+            if (problemGenerator.answer == user_answer) 
+            {
+                //robot explode animate yay
+                robotAnimation = 2;
+                
+            } else {
+                robotAnimation = 3;
+            }
+        })
+    
+    stage.addChild(launch_button);
+   */ 
+} 
+
 
 function win_screen() {
     var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
@@ -361,16 +407,19 @@ window.onload = function(){
     problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
+	init_missile();
     init_robot();
     init_equationbox();
     init_numberLine();
     init_target();
     init_instructions();
+
     // start animating
 
     stage.addChild(buttonGenerator(500, 300, 100, 50, 0xAAAAFF, 5, 0.3, "test", function () {
         console.log("hey nice");
     }));
+
     animate();
 
 }
@@ -378,9 +427,8 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 
+	robot_moveToPosition();
+	robot_attack();
     // render the container
     renderer.render(stage);
-	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
-				robot.x += 5;
-	}	
 }
