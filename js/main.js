@@ -19,6 +19,10 @@ var updateTime; */
 var nl_w = 550;
 var nl_h = 1;
 
+// Equation Box Global Variables
+var eqb_w = 600;
+var eqb_h = 100;
+
 function numberLine_update() {
     numberLine.clear();
     numberLine.lineStyle(2, 0x000000, 1.0);
@@ -43,6 +47,7 @@ function init_numberLine() {
 
 function numberLine_coordiniates(number) {
     for (var i = 0; i < (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+        var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
         var nl_num = i+problemGenerator.rangeBottom;
         var nl_x = (i/range)*nl_w + numberLine.x;
         var nl_y = numberLine.y;
@@ -147,19 +152,22 @@ function init_tower() {
 
 function init_robot() {
     robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=50;
+    robot.position.x=-50;
     robot.position.y=500;
     stage.addChild(robot);
 }
 
 function init_launch_button() {
-
+    equationBox.beginFill(0xFFCC11, 1.0);
+    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
+    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
+    launch_text.x = 281;
+    launch_text.y = 20;
+    equationBox.addChild(launch_text);
 }
 
 function equationBox_update() {
     equationBox.clear();
-    var eqb_w = 600;
-    var eqb_h = 100;
     // background box
     equationBox.beginFill(0x333333, 1.0);
     equationBox.lineStyle(2, 0x000000, 1.0);
@@ -168,12 +176,6 @@ function equationBox_update() {
     equationBox.beginFill(0xFFFFFF, 1.0);
     equationBox.drawRect(10, 10, eqb_h-20, eqb_h-20);
     equationBox.drawRect(150, 10, eqb_h-20, eqb_h-20);
-    //launch button
-    equationBox.beginFill(0xFFCC11, 1.0);
-    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
-    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
-    launch_text.x = 281;
-    launch_text.y = 20;
     // plus symbol
     equationBox.lineStyle(0, 0x000000, 0.0);
     equationBox.drawRect(117,36,5,30);
@@ -186,7 +188,7 @@ function equationBox_update() {
     n2.y = 35;
     equationBox.addChild(n1);
     equationBox.addChild(n2);
-    equationBox.addChild(launch_text);
+    init_launch_button();
 }
 
 function init_equationbox() {
@@ -302,8 +304,8 @@ function animate() {
 
     // render the container
     renderer.render(stage);
-	if(robot.x <= 700){
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
 				robot.x += 5;
-			}
+	}
 	
 }
