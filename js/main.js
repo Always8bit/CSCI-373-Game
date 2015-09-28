@@ -167,7 +167,7 @@ function init_launch_button() {
     equationBox.addChild(launch_text);
 }
 
->>>>>>> origin/master
+
 function equationBox_update() {
     equationBox.clear();
     // background box
