@@ -14,7 +14,7 @@ var background;
 var user_answer;
 
 // Animation Variables
-var robotAnimation; // 0 initial, 1 moveToPostion, 2 selfdestruct, 3 attack
+var robotAnimation; // 0 initial position, 1 moveToPostion, 2 selfdestruct, 3 attack
 
 /*var gameTimer;
 var gameTime = 0; 8
