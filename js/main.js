@@ -173,6 +173,12 @@ function init_missile() {
 	stage.addChild(missile);
 }
 
+function missile_moveToPosition(){
+	if(missile.y >= -100){
+		missile.y -= 7;
+	}	
+}	
+
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
     {
@@ -350,7 +356,7 @@ window.onload = function(){
 
 function animate() {
     requestAnimationFrame(animate);
-
+	missile_moveToPosition();
 	robot_moveToPosition();
 	robot_attack();
     // render the container
