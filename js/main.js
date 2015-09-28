@@ -158,15 +158,6 @@ function init_robot() {
     stage.addChild(robot);
 }
 
-function init_launch_button() {
-    equationBox.beginFill(0xFFCC11, 1.0);
-    equationBox.drawRect(275, 10, eqb_h-.01, eqb_h-50);
-    var launch_text = new PIXI.Text("Launch!",{font : '25px Arial', fill : 0x000000, align : 'center'});
-    launch_text.x = 281;
-    launch_text.y = 20;
-    equationBox.addChild(launch_text);
-}
-
 
 function equationBox_update() {
     equationBox.clear();
@@ -248,18 +239,22 @@ function init_target(){
 }
 
 
-/* function init_launch_button() {
+ function init_launch_button() {
     launch_button
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
-            //compare problemGenerator.answer with snap_object.number?
+            //button generator?
+            if (problemGenerator.answer == user_answer) 
+            {
             //tell robot to animate
+            robot_move.animate();
             //tell missile to launch
+            missile_launch.animate();
         })
     
     stage.addChild(launch_button);
-} */
+} 
 
 
 function win_screen() {
