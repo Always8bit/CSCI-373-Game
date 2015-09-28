@@ -279,6 +279,8 @@ function init_target(){
                
                 //start a new problem
                 equationBox_update();
+            } else {
+                robotAnimation = 2;
             }
         })
     
