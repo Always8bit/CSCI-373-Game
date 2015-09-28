@@ -12,6 +12,9 @@ var launch_button;
 var background;
 var user_answer;
 
+// Animation Variables
+var robotAnimation;
+
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
@@ -153,9 +156,17 @@ function init_tower() {
 
 function init_robot() {
     robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=-50;
+    robot.position.x=50;
     robot.position.y=500;
+	robotAnimation = 0;
     stage.addChild(robot);
+	
+}
+
+function robot_moveToPosition(){
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
+				robot.x += 5;
+			}
 }
 
 
@@ -319,10 +330,8 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 
+	robot_moveToPosition();
     // render the container
     renderer.render(stage);
-	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
-				robot.x += 5;
-	}
 	
 }
