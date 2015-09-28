@@ -15,6 +15,7 @@ var user_answer;
 
 // Animation Variables
 var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
+
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
@@ -273,16 +274,13 @@ function init_target(){
         .on('click', function(event) {
             this.data = event.data;
 			robotAnimation = 1;
-            robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
                 //robot explode animate
                 robotAnimation = 2;
-                robot_moveToPosition();
                 
             } else {
                 robotAnimation = 3;
-                robot_moveToPosition();
             }
         })
     
