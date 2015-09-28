@@ -164,9 +164,10 @@ function init_robot() {
 }
 
 function robot_moveToPosition(){
-	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16){
-				robot.x += 5;
-			}
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
+    {
+        robot.x += 5;
+	}
 }
 
 
@@ -251,16 +252,14 @@ function init_target(){
 
 
   function init_launch_button() {
-/*    launch_button
+ /*   launch_button
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
             //button generator here?
+            robot_moveToPosition();
             if (problemGenerator.answer == user_answer) 
             {
-                //tell robot to animate
-                
-                //tell missile to launch
                
                 //start a new problem
                 equationBox_update();
@@ -268,7 +267,7 @@ function init_target(){
         })
     
     stage.addChild(launch_button);
-    */
+   */ 
 } 
 
 
