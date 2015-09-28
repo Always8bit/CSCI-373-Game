@@ -15,7 +15,6 @@ var user_answer;
 
 // Animation Variables
 var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
-
 /*var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
@@ -279,10 +278,11 @@ function init_target(){
             {
                 //robot explode animate
                 robotAnimation = 2;
-                //start new problem
+                robot_moveToPosition();
                 
             } else {
                 robotAnimation = 3;
+                robot_moveToPosition();
             }
         })
     
