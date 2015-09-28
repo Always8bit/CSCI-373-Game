@@ -14,7 +14,7 @@ var background;
 var user_answer;
 
 // Animation Variables
-var robotAnimation;
+var robotAnimation; // 0 initial, 1 moveToPostion, 2 selfdestruct, 3 attack
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -183,6 +183,7 @@ function robot_moveToPosition(){
 function robot_attack(){
 	if(robot.x <= 1000){
 		robot.x += 10;
+		lives -= 1;
 	}
 }
 
