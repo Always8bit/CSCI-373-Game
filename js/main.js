@@ -434,10 +434,10 @@ window.onload = function(){
     init_numberLine();
     init_tower();
 	init_missile();
-    init_robot();
     init_equationbox();
     init_numberLine();
     init_target();
+    init_robot();
     init_instructions();
 
     // start animating
