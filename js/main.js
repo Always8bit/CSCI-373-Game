@@ -166,13 +166,6 @@ function init_robot() {
 	
 }
 
-function init_missile() {
-	missile = PIXI.Sprite.fromImage('images/missile.png');
-	missile.position.x=770;
-	missile.position.y=225;
-	stage.addChild(missile);
-}
-
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
     {
@@ -186,6 +179,14 @@ function robot_attack(){
 		lives -= 1;
 	}
 }
+
+function init_missile() {
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=770;
+	missile.position.y=225;
+	stage.addChild(missile);
+}
+
 
 
 function equationBox_update() {
