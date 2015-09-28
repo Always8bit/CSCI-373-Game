@@ -13,8 +13,10 @@ var launch_button;
 var background;
 var user_answer;
 
-// Animation Variables
+// Robot Animation Variables
 var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
+var robotIntervalVariable;
+var robotAnimationFrame;
 
 /*var gameTimer;
 var gameTime = 0; 8
@@ -158,12 +160,13 @@ function init_tower() {
 }
 
 function init_robot() {
-    robot = PIXI.Sprite.fromImage('images/robot.png');
-    robot.position.x=50;
+    robot = PIXI.Sprite.fromImage('images/robot/1.png');
+    robot.position.x=-50;
     robot.position.y=500;
 	robotAnimation = 0;
+    robotAnimationFrame = 0;
     stage.addChild(robot);
-	
+    robotIntervalVariable = setInterval(robot_animationIdle, 100);
 }
 
 function init_missile() {
@@ -180,17 +183,23 @@ function missile_moveToPosition(){
 }	
 
 function robot_moveToPosition(){
-	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-16)
+	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
     {
-        robot.x += 5;
+        robot.x += 4;
 	}
 }
 
 function robot_attack(){
 	if(robot.x <= 1000){
-		robot.x += 10;
+		robot.x += 0;
 		lives -= 1;
 	}
+}
+
+function robot_animationIdle() {
+    robot.texture = PIXI.Texture.fromImage("images/robot/" + robotAnimationFrame + ".png");
+    robotAnimationFrame++;
+    robotAnimationFrame = robotAnimationFrame%2;
 }
 
 function init_missile() {
