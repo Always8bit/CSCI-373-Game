@@ -293,10 +293,11 @@ function init_target(){
   //initializes the launch sequence
   function init_launch_button() {
     //create launch button
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xAAAAFF, 5, 0.3, "Launch", launch_activate()));
+      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xFF3300, 5, 0.3, "Launch", launch_activate()));
   }
 
    function launch_activate() {
+       //move robot to the right answer
        robotAnimation = 1;
         if (problemGenerator.answer == user_answer) 
         {
@@ -304,6 +305,7 @@ function init_target(){
             robotAnimation = 2;
                 
         } else {
+            //robot attacks the base
             robotAnimation = 3;
         }
   } 
