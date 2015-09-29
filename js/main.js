@@ -18,7 +18,7 @@ var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
 var robotIntervalVariable;
 var robotAnimationFrame;
 
-/*var gameTimer;
+/* var gameTimer;
 var gameTime = 0; 8
 var updateTime; */
 
@@ -292,7 +292,14 @@ function init_target(){
 
 
   function init_launch_button() {
- /*   launch_button
+      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xAAAAFF, 5, 0.3, "Launch", 
+                function () 
+                {
+                    console.log("hey nice");
+                }));
+  }
+
+  /* function launch_activate() {
         //event for clicking the launch button
         .on('click', function(event) {
             this.data = event.data;
@@ -308,9 +315,9 @@ function init_target(){
         })
     
     stage.addChild(launch_button);
-   */ 
-} 
 
+} 
+*/
 
 function win_screen() {
     var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
@@ -359,8 +366,8 @@ function buttonGenerator(x, y, width, height, color, elevation, speed, text, cli
     var button_top = new PIXI.Sprite(button_top_tex);
 
     var text_gfx = new PIXI.Text(text,{font : '28px Arial', fill : 0x000000, align : 'center'});
-    text_gfx.x = 0;
-    text_gfx.y = 0;
+    text_gfx.x = 13;
+    text_gfx.y = 10;
     button_top.addChild(text_gfx);
     
     button.addChild(button_bottom);
@@ -439,13 +446,10 @@ window.onload = function(){
     init_target();
     init_robot();
     init_instructions();
-
+    init_launch_button();
     // start animating
 
-    stage.addChild(buttonGenerator(500, 300, 100, 50, 0xAAAAFF, 5, 0.3, "test", function () {
-        console.log("hey nice");
-    }));
-
+    
     animate();
 
 }
