@@ -290,20 +290,16 @@ function init_target(){
     stage.addChild(target);
 }
 
-
+  //initializes the launch sequence
   function init_launch_button() {
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xAAAAFF, 5, 0.3, "Launch", 
-                function () 
-                {
-                    console.log("hey nice");
-                }));
+    //create launch button
+      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xAAAAFF, 5, 0.3, "Launch", launch_activate()));
   }
 
-  /* function launch_activate() {
-        //event for clicking the launch button
-        .on('click', function(event) {
-            this.data = event.data;
-			robotAnimation = 1;
+   function launch_activate() {
+       robotAnimation = 1;
+       
+
             if (problemGenerator.answer == user_answer) 
             {
                 //robot explode animate yay
@@ -312,12 +308,8 @@ function init_target(){
             } else {
                 robotAnimation = 3;
             }
-        })
-    
-    stage.addChild(launch_button);
+  } 
 
-} 
-*/
 
 function win_screen() {
     var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
