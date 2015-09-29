@@ -449,8 +449,9 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 	missile_moveToPosition();
-	robot_moveToPosition();
-	robot_attack();
+	//if(robotAnimation == 1){
+		robot_moveToPosition();
+	//}
     // render the container
     renderer.render(stage);
 }
