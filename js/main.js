@@ -298,16 +298,14 @@ function init_target(){
 
    function launch_activate() {
        robotAnimation = 1;
-       
-
-            if (problemGenerator.answer == user_answer) 
-            {
-                //robot explode animate yay
-                robotAnimation = 2;
+        if (problemGenerator.answer == user_answer) 
+        {
+            //robot explode animation
+            robotAnimation = 2;
                 
-            } else {
-                robotAnimation = 3;
-            }
+        } else {
+            robotAnimation = 3;
+        }
   } 
 
 
