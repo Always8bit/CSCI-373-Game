@@ -156,7 +156,16 @@ function init_tower() {
     tower = PIXI.Sprite.fromImage('images/tower.png');
     tower.position.x=-165;
     tower.position.y=261;
+	lives = 3;
     stage.addChild(tower);
+}
+
+function lives_left(){
+	var lives_text = new PIXI.Text(lives,{font: '28px Arial', fill: 0x000000, align : 
+'center'});
+	lives_text.x = 800;
+	lives_text.y = 425;
+	stage.addChild(lives_text);
 }
 
 function init_robot() {
@@ -190,8 +199,8 @@ function robot_moveToPosition(){
 }
 
 function robot_attack(){
-	if(robot.x <= 1000){
-		robot.x += 0;
+	if(robot.x <= 800){
+		robot.x += 10;
 		lives -= 1;
 	}
 }
@@ -293,13 +302,13 @@ function init_target(){
   //initializes the launch sequence
   function init_launch_button() {
     //create launch button
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xFF3300, 5, 0.3, "Launch", launch_activate()));
+      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xFF3300, 5, 0.3, "Launch", launch_activate));
   }
 
    function launch_activate() {
        //move robot to the right answer
        robotAnimation = 1;
-        if (problemGenerator.answer == user_answer) 
+       /* if (problemGenerator.answer == user_answer) 
         {
             //robot explode animation
             robotAnimation = 2;
@@ -307,7 +316,7 @@ function init_target(){
         } else {
             //robot attacks the base
             robotAnimation = 3;
-        }
+        }*/
   } 
 
 
@@ -432,6 +441,7 @@ window.onload = function(){
     problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
+	lives_left();
 	init_missile();
     init_equationbox();
     init_numberLine();
@@ -449,9 +459,9 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 	missile_moveToPosition();
-	//if(robotAnimation == 1){
+	if(robotAnimation == 1){
 		robot_moveToPosition();
-	//}
+	}
     // render the container
     renderer.render(stage);
 }
