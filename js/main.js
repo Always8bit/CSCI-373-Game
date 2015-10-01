@@ -15,7 +15,7 @@ var background;
 var user_answer;
 
 // Animation Variables
-var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
+var robotAnimation; // 0 stop, 1 moveToPostion, 2 atposition, 3 selfdestruct, 4 attack
 var robotIntervalVariable;
 var robotAnimationFrame;
 
@@ -186,9 +186,9 @@ function init_missile() {
 	stage.addChild(missile);
 }
 
-function missile_moveToPosition(){
+function missile_moveOffscreen(){
 	if(missile.y >= -100){
-		missile.y -= 7;
+		missile.y -= (225-missile.y+5)/10;
 	}	
 }	
 
@@ -196,7 +196,9 @@ function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
     {
         robot.x += 4;
-	}
+	} else if (robotAnimation == 1) {
+        robotAnimation = 2;
+    }
 }
 
 function robot_attack(){
@@ -467,7 +469,9 @@ function animate() {
 	if(robotAnimation == 1){
 		missile_moveToPosition();
 		robot_moveToPosition();
-	}
+	} else if (robotAnimation == 2) {
+        missile_moveOffscreen();
+    }
     // render the container
     renderer.render(stage);
 }
