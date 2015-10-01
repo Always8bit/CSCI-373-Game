@@ -339,15 +339,6 @@ function init_target(){
             missileDown.x = target.x;
             robotAnimation = 1;           
        }
-       /* if (problemGenerator.answer == user_answer) 
-        {
-            //robot explode animation
-            robotAnimation = 2;
-                
-        } else {
-            //robot attacks the base
-            robotAnimation = 3;
-        }*/
   } 
 
 
