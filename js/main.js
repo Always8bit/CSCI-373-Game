@@ -467,7 +467,6 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 	if(robotAnimation == 1){
-		missile_moveToPosition();
 		robot_moveToPosition();
 	} else if (robotAnimation == 2) {
         missile_moveOffscreen();
