@@ -4,18 +4,24 @@ var renderer;
 // Object Variables
 var tower;
 var robot;
-var missile;
-var missileDown;
 var equationBox;
 var problemGenerator;
 var numberLine;
-var target;
 var launch_button;
 var background;
 var user_answer;
 
+// Missile Variables
+var missile;
+var missileDown;
+var missileAnimation; // 0 init, 1 apex and ready to launch down, 2 xplodededed
+
+// Target Variables
+var target;
+var targetSnapped;
+
 // Animation Variables
-var robotAnimation; // 0 stop, 1 moveToPostion, 2 selfdestruct, 3 attack
+var robotAnimation; // 0 stop, 1 moveToPostion, 2 atposition, 3 selfdestruct, 4 attack
 var robotIntervalVariable;
 var robotAnimationFrame;
 
@@ -179,6 +185,7 @@ function init_robot() {
     robotIntervalVariable = setInterval(robot_animationIdle, 100);
 }
 
+
 function missile_moveToPosition(){
 	if(missile.y >= -100){
 		missile.y -= 7;
@@ -192,11 +199,14 @@ function missileDown_moveToPosition(){
 	}	
 }
 
+
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
     {
         robot.x += 4;
-	}
+	} else if (robotAnimation == 1) {
+        robotAnimation = 2;
+    }
 }
 
 function robot_attack(){
@@ -217,6 +227,7 @@ function init_missile() {
 	missile.position.x=770;
 	missile.position.y=225;
 	stage.addChild(missile);
+    missileAnimation = 0; 
 }
 
 function init_missileDown(){
@@ -224,8 +235,28 @@ function init_missileDown(){
 	missileDown.rotation = 600;
 	missileDown.position.x=500;
 	missileDown.position.y=-100;
+	missileDown.position.x=500;
+	missileDown.position.y=-200;
+    missileDown.anchor.set(0.5);
+    missileDown.rotation = 3.14159;
 	stage.addChild(missileDown);
 }
+
+function missile_moveOffscreen(){
+	if (missile.y >= -600){
+		missile.y -= (225-missile.y+5)/15;
+	} else if (missileAnimation == 0) {
+        missileAnimation = 1;
+    }
+}	
+
+function missileDown_moveOnscreen(){
+	if (missileDown.y <= 700){
+		missileDown.y += (missileDown.y+200+25)/17;
+	} else if (missileAnimation == 1) {
+        missileAnimation = 2;
+    }
+}	
 
 function equationBox_update() {
     equationBox.clear();
@@ -261,6 +292,7 @@ function init_equationbox() {
 }
 
 function init_target(){
+    targetSnapped = 0;
     target = PIXI.Sprite.fromImage('images/target.png');
     target.interactive = true;
     target.buttonMode = true;
@@ -283,11 +315,14 @@ function init_target(){
             if (snap_object != -1) {
                 this.position.x = snap_object.x;
                 this.position.y = snap_object.y-15;
+                targetSnapped = 1;
                 if (snap_object.number == problemGenerator.answer) {
-                    win_screen();
+                    //win_screen();
                 } else{
-                    lose_screen();
+                    //lose_screen();
               }
+            } else {
+                targetSnapped = 0;
             }
         })
         // events for drag move
@@ -314,7 +349,10 @@ function init_target(){
 
    function launch_activate() {
        //move robot to the right answer
-       robotAnimation = 1;
+       if (targetSnapped == 1) {
+            missileDown.x = target.x;
+            robotAnimation = 1;           
+       }
        /* if (problemGenerator.answer == user_answer) 
         {
             //robot explode animation
@@ -446,6 +484,7 @@ window.onload = function(){
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
+    init_missileDown();
     init_numberLine();
     init_tower();
 	lives_left();
@@ -467,10 +506,16 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 	if(robotAnimation == 1){
-		missile_moveToPosition();
 		robot_moveToPosition();
 		missileDown_moveToPosition();
 	}
+	} else if (robotAnimation == 2) {
+        missile_moveOffscreen();
+    }
+    
+    if (missileAnimation == 1) {
+        missileDown_moveOnscreen();
+    }
     // render the container
     renderer.render(stage);
 }
