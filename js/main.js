@@ -179,18 +179,18 @@ function init_robot() {
     robotIntervalVariable = setInterval(robot_animationIdle, 100);
 }
 
-function init_missile() {
-	missile = PIXI.Sprite.fromImage('images/missile.png');
-	missile.position.x=770;
-	missile.position.y=225;
-	stage.addChild(missile);
-}
-
 function missile_moveToPosition(){
 	if(missile.y >= -100){
 		missile.y -= 7;
 	}	
 }	
+
+function missileDown_moveToPosition(){
+	missileDown.x = numberLine_coordiniates(problemGenerator.answer).x+25;
+	if(missileDown.y <= 600){
+		missileDown.y += 7;
+	}	
+}
 
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
@@ -220,10 +220,11 @@ function init_missile() {
 }
 
 function init_missileDown(){
-	missile = PIXI.Sprite.fromImage('images/missile.png');
-	missile.position.x=500;
-	missile.position.y=-100;
-	stage.addChild(missile);
+	missileDown = PIXI.Sprite.fromImage('images/missile.png');
+	missileDown.rotation = 600;
+	missileDown.position.x=500;
+	missileDown.position.y=-100;
+	stage.addChild(missileDown);
 }
 
 function equationBox_update() {
@@ -449,6 +450,7 @@ window.onload = function(){
     init_tower();
 	lives_left();
 	init_missile();
+	init_missileDown();
     init_equationbox();
     init_numberLine();
     init_target();
@@ -467,6 +469,7 @@ function animate() {
 	if(robotAnimation == 1){
 		missile_moveToPosition();
 		robot_moveToPosition();
+		missileDown_moveToPosition();
 	}
     // render the container
     renderer.render(stage);
