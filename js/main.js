@@ -1,6 +1,9 @@
+// Remember to sync before making changes ^o^
+
 // Display Variables
 var stage;
 var renderer;
+
 // Object Variables
 var tower;
 var robot;
