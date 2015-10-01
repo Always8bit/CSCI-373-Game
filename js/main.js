@@ -5,6 +5,7 @@ var renderer;
 var tower;
 var robot;
 var missile;
+var missileDown;
 var equationBox;
 var problemGenerator;
 var numberLine;
@@ -218,7 +219,12 @@ function init_missile() {
 	stage.addChild(missile);
 }
 
-
+function init_missileDown(){
+	missile = PIXI.Sprite.fromImage('images/missile.png');
+	missile.position.x=500;
+	missile.position.y=-100;
+	stage.addChild(missile);
+}
 
 function equationBox_update() {
     equationBox.clear();
@@ -458,8 +464,8 @@ window.onload = function(){
 
 function animate() {
     requestAnimationFrame(animate);
-	missile_moveToPosition();
 	if(robotAnimation == 1){
+		missile_moveToPosition();
 		robot_moveToPosition();
 	}
     // render the container
