@@ -186,20 +186,6 @@ function init_robot() {
 }
 
 
-function missile_moveToPosition(){
-	if(missile.y >= -100){
-		missile.y -= 7;
-	}	
-}	
-
-function missileDown_moveToPosition(){
-	missileDown.x = numberLine_coordiniates(problemGenerator.answer).x+25;
-	if(missileDown.y <= 600){
-		missileDown.y += 7;
-	}	
-}
-
-
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
     {
@@ -489,7 +475,6 @@ window.onload = function(){
     init_tower();
 	lives_left();
 	init_missile();
-	init_missileDown();
     init_equationbox();
     init_numberLine();
     init_target();
@@ -506,9 +491,7 @@ window.onload = function(){
 function animate() {
     requestAnimationFrame(animate);
 	if(robotAnimation == 1){
-		robot_moveToPosition();
-		missileDown_moveToPosition();
-	}
+        robot_moveToPosition();
 	} else if (robotAnimation == 2) {
         missile_moveOffscreen();
     }
