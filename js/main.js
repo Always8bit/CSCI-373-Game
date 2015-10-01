@@ -202,6 +202,10 @@ function robot_attack(){
 	}
 }
 
+function robot_selfDestruct(){
+	
+}
+
 function robot_animationIdle() {
     robot.texture = PIXI.Texture.fromImage("images/robot/idle/" + robotAnimationFrame + ".png");
     robotAnimationFrame++;
@@ -485,7 +489,11 @@ function animate() {
         robot_moveToPosition();
 	} else if (robotAnimation == 2) {
         missile_moveOffscreen();
-    }
+    } else if(robotAnimation == 3){
+		robot_selfDestruct();
+	} else if(robotAnimation == 4){
+		robot_attack();
+	}
     
     if (missileAnimation == 1) {
         missileDown_moveOnscreen();
