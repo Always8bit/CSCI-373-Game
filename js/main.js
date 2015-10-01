@@ -356,7 +356,7 @@ function init_target(){
        if (targetSnapped == 1) {
             missileDown.x = target.x;
             robotAnimation = 1;           
-       } 
+       }
        /* if (problemGenerator.answer == user_answer) 
         {
             //robot explode animation
