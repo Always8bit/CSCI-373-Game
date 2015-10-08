@@ -330,14 +330,15 @@ function init_target(){
     // move the sprite to its designated position
     target.position.x = 522;
     target.position.y = 90;
-    
+    target.anchor.set(0.5);
     stage.addChild(target);
 }
 
   //initializes the launch sequence
   function init_launch_button() {
     //create launch button
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xFF3300, 5, 0.3, "Launch", launch_activate));
+       
+      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
   }
 
    function launch_activate() {
@@ -380,7 +381,7 @@ function init_background() {
 }
 
 
-function buttonGenerator(x, y, width, height, color, elevation, speed, text, clickedFunction) {
+function buttonGenerator(x, y, width, height, color, elevation, speed, what, clickedFunction) {
     var button = new PIXI.Graphics();
     var button_top_gfx = new PIXI.Graphics();
     var button_bottom = new PIXI.Graphics();
@@ -395,9 +396,9 @@ function buttonGenerator(x, y, width, height, color, elevation, speed, text, cli
     var button_top_tex = button_top_gfx.generateTexture();
     var button_top = new PIXI.Sprite(button_top_tex);
 
-    var text_gfx = new PIXI.Text(text,{font : '28px Arial', fill : 0x000000, align : 'center'});
-    text_gfx.x = 13;
-    text_gfx.y = 10;
+    var text_gfx = new PIXI.Sprite.fromImage(what);
+    text_gfx.anchor.set(-.1); 
+    
     button_top.addChild(text_gfx);
     
     button.addChild(button_bottom);
@@ -480,11 +481,14 @@ window.onload = function(){
     init_instructions();
     init_launch_button();
     // start animating
-
+    
+    //start_screen();
     
     animate();
 
 }
+
+
 
 function animate() {
     requestAnimationFrame(animate);
@@ -503,4 +507,26 @@ function animate() {
     }
     // render the container
     renderer.render(stage);
+}
+
+function start_screen(){
+    //Same Background
+    background = PIXI.Sprite.fromImage('images/background1.png');
+    background.x = 0;
+    background.y = 0;
+    stage.addChild(background);
+    
+  
+    tower = PIXI.Sprite.fromImage('images/tower.png');
+    tower.position.x=-165;
+    tower.position.y=261;
+	lives = 3;
+    stage.addChild(tower);
+    
+    
+    
+    stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
+    stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
+    stage.addChild(buttonGenerator(300, 340, 250, 50, 0xCC0000, 5, 0.3,'images/diff.png', launch_activate));
+
 }
