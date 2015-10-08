@@ -478,6 +478,7 @@ window.onload = function(){
     init_numberLine();
     init_target();
     init_robot();
+   
     init_instructions();
     init_launch_button();
     // start animating
@@ -523,7 +524,12 @@ function start_screen(){
 	lives = 3;
     stage.addChild(tower);
     
-    
+   
+    robot.position.x= 100;
+    robot.position.y=505;
+    stage.addChild(robot);
+
+
     
     stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
     stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
