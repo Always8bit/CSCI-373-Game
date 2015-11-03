@@ -366,8 +366,9 @@ function lose_screen(){
 }
 
 
+
 function init_instructions() {
-    var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0x000000, align : 'center'});
+    var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0xFF000, align : 'center'});
     basicText.x = 20;
     basicText.y = 115;
     stage.addChild(basicText);
