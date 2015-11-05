@@ -484,7 +484,7 @@ window.onload = function(){
     init_launch_button();
     // start animating
     
-    //start_screen();
+    start_screen();
     
     animate();
 
@@ -534,6 +534,6 @@ function start_screen(){
     
     stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
     stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
-    stage.addChild(buttonGenerator(300, 340, 250, 50, 0xCC0000, 5, 0.3,'images/diff.png', launch_activate));
+    
 
 }
