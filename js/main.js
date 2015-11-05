@@ -13,6 +13,7 @@ var numberLine;
 var launch_button;
 var background;
 var user_answer;
+var instruction_box;
 
 // Missile Variables
 var missile;
@@ -27,10 +28,6 @@ var targetSnapped;
 var robotAnimation; // 0 stop, 1 moveToPostion, 2 atposition, 3 selfdestruct, 4 attack
 var robotIntervalVariable;
 var robotAnimationFrame;
-
-/* var gameTimer;
-var gameTime = 0; 8
-var updateTime; */
 
 var lives;
 
@@ -278,6 +275,7 @@ function equationBox_update() {
     init_launch_button();
 }
 
+/* Create the Box for Equations using PIXI graphics */
 function init_equationbox() {
     equationBox = new PIXI.Graphics();
     equationBox.x = 10;
@@ -482,11 +480,11 @@ window.onload = function(){
     init_target();
     init_robot();
    
-    init_instructions();
     init_launch_button();
     // start animating
     
     //start_screen();
+    init_instructions();
     
     animate();
 
@@ -537,5 +535,40 @@ function start_screen(){
     stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
     stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
     stage.addChild(buttonGenerator(300, 340, 250, 50, 0xCC0000, 5, 0.3,'images/diff.png', launch_activate));
+
+}
+
+/* Screen for instructions 
+   Void function that creates a box with text instructions
+*/
+function init_instructions(){
+    //Same Background
+    background = PIXI.Sprite.fromImage('images/background1.png');
+    background.x = 0;
+    background.y = 0;
+    stage.addChild(background);
+    
+  
+    tower = PIXI.Sprite.fromImage('images/tower.png');
+    tower.position.x=-165;
+    tower.position.y=261;
+	lives = 3;
+    stage.addChild(tower);
+    
+   
+    robot.position.x= 800;
+    robot.position.y=250;
+    stage.addChild(robot);
+    
+    instruction_box = new PIXI.Graphics();
+    instruction_box.x = 100;
+    instruction_box.y = 100;
+    
+    stage.addChild(instruction_box);
+    
+    instruction_box.beginFill(0x555444, 1.0);
+    instruction_box.lineStyle(2, 0x000000, 1.0);
+    instruction_box.drawRect(30, 30, eqb_w-50, eqb_h-60);
+    
 
 }
