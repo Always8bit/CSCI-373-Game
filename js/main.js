@@ -206,7 +206,7 @@ function robot_attack(){
 }
 
 function robot_selfDestruct(){
-	
+	stage.removeChild(robot);
 }
 
 function robot_animationIdle() {
@@ -246,6 +246,8 @@ function missile_moveOffscreen(){
 function missileDown_moveOnscreen(){
 	if (missileDown.y <= 700){
 		missileDown.y += (missileDown.y+200+25)/17;
+	} else if (missileDown.y > 700){
+		robotAnimation = 3;
 	} else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
