@@ -13,6 +13,7 @@ var numberLine;
 var launch_button;
 var background;
 var user_answer;
+var instruction_box;
 
 // Missile Variables
 var missile;
@@ -28,10 +29,6 @@ var robotAnimation; // 0 stop, 1 moveToPostion, 2 atposition, 3 selfdestruct, 4 
 var robotIntervalVariable;
 var robotAnimationFrame;
 
-/* var gameTimer;
-var gameTime = 0; 8
-var updateTime; */
-
 var lives;
 
 // Number Line Global Variables
@@ -39,7 +36,7 @@ var nl_w = 550;
 var nl_h = 1;
 
 // Equation Box Global Variables
-var eqb_w = 600;
+var eqb_w = 665;
 var eqb_h = 100;
 
 function numberLine_update() {
@@ -206,7 +203,7 @@ function robot_attack(){
 }
 
 function robot_selfDestruct(){
-	
+	stage.removeChild(robot);
 }
 
 function robot_animationIdle() {
@@ -246,6 +243,8 @@ function missile_moveOffscreen(){
 function missileDown_moveOnscreen(){
 	if (missileDown.y <= 700){
 		missileDown.y += (missileDown.y+200+25)/17;
+	} else if (missileDown.y > 700){
+		robotAnimation = 3;
 	} else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
@@ -276,6 +275,7 @@ function equationBox_update() {
     init_launch_button();
 }
 
+/* Create the Box for Equations using PIXI graphics */
 function init_equationbox() {
     equationBox = new PIXI.Graphics();
     equationBox.x = 10;
@@ -328,8 +328,8 @@ function init_target(){
             }
         });
     // move the sprite to its designated position
-    target.position.x = 522;
-    target.position.y = 90;
+    target.position.x = 585;
+    target.position.y = 75;
     target.anchor.set(0.5);
     stage.addChild(target);
 }
@@ -338,7 +338,7 @@ function init_target(){
   function init_launch_button() {
     //create launch button
        
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
+      stage.addChild(buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
   }
 
    function launch_activate() {
@@ -365,14 +365,6 @@ function lose_screen(){
     stage.addChild(lose_text);
 }
 
-
-
-function init_instructions() {
-    var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0xFF000, align : 'center'});
-    basicText.x = 20;
-    basicText.y = 115;
-    stage.addChild(basicText);
-}
 
 function init_background() {
     background = PIXI.Sprite.fromImage('images/background1.png');
@@ -470,22 +462,21 @@ window.onload = function(){
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
-    init_missileDown();
+    //init_missileDown();
     init_numberLine();
     init_tower();
 	lives_left();
-	init_missile();
+	//init_missile();
     init_equationbox();
     init_numberLine();
     init_target();
     init_robot();
+    //init_launch_button();
    
-    init_instructions();
-    init_launch_button();
     // start animating
     
+    //init_instructions();
     start_screen();
-    
     animate();
 
 }
@@ -510,7 +501,23 @@ function animate() {
     // render the container
     renderer.render(stage);
 }
+function game_button(){
+    init_background();
+    init_problemGenerator();
+    problemGenerator.setDifficulty(0);
+    problemGenerator.generateNewProblem();
+    init_missileDown();
+    init_numberLine();
+    init_tower();
+	lives_left();
+	init_missile();
+    init_equationbox();
+    init_numberLine();
+    init_target();
+    init_robot();
+    init_launch_button();
 
+}
 function start_screen(){
     //Same Background
     background = PIXI.Sprite.fromImage('images/background1.png');
@@ -529,11 +536,47 @@ function start_screen(){
     robot.position.x= 100;
     robot.position.y=505;
     stage.addChild(robot);
-
+    animate();
 
     
-    stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
-    stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
+    stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
+    stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
     
 
 }
+
+/* Screen for instructions 
+   Void function that creates a box with text instructions
+*/
+function init_instructions(){
+    //Same Background
+    background = PIXI.Sprite.fromImage('images/background1.png');
+    background.x = 0;
+    background.y = 0;
+    stage.addChild(background);
+    
+  
+    tower = PIXI.Sprite.fromImage('images/tower.png');
+    tower.position.x=-165;
+    tower.position.y=261;
+	lives = 3;
+    stage.addChild(tower);
+    
+   
+    robot.position.x= 800;
+    robot.position.y=250;
+    stage.addChild(robot);
+    
+    instruction_box = new PIXI.Graphics();
+    instruction_box.x = 100;
+    instruction_box.y = 100;
+    
+    stage.addChild(instruction_box);
+    
+    instruction_box.beginFill(0x555444, 1.0);
+    instruction_box.lineStyle(2, 0x000000, 1.0);
+    instruction_box.drawRect(30, 30, eqb_w-50, eqb_h-60);
+    
+
+}
+
