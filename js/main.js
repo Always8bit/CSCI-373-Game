@@ -475,9 +475,8 @@ window.onload = function(){
    
     // start animating
     
-    //init_instructions();
     start_screen();
-    animate();
+    
 
 }
 
@@ -538,7 +537,10 @@ function start_screen(){
     stage.addChild(robot);
     animate();
 
-    
+    /*color for font is (start color: #B2B6B8 & end color:#5D5F61)
+    fount at http://cooltext.com/Logo-Design-Skate
+    font size depends on length of word
+    */
     stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
     stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
     
