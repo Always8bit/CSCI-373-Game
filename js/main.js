@@ -232,6 +232,21 @@ function robot_attack(){
     }
 }
 
+function cloudGenerator(height, speed, scale) {
+    var cloud = new PIXI.Sprite(PIXI.loader.resources.cloud.texture);
+    cloud.anchor.set(0.5, 0.5);
+    cloud.position.x = Math.random()*1000;
+    cloud.position.y = height;
+    cloud.scale.set(scale, scale);
+    setInterval(function() {
+        cloud.position.x += speed;
+        var left_edge = cloud.position.x - (cloud.width/2);
+        if (left_edge > 1000)
+            cloud.position.x = 0 - (cloud.width/2);
+    }, 20);
+    return cloud;   
+}
+
 function robot_selfDestruct(){
 	stage.removeChild(robot);
 }
@@ -406,10 +421,15 @@ function lose_screen(){
 
 
 function init_background() {
-    background = PIXI.Sprite.fromImage('images/background1.png');
-    background.x = 0;
-    background.y = 0;
-    stage.addChild(background);
+    background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+    background_f = PIXI.Sprite.fromImage('images/backgroundforeground.png');
+    background_b.x = 0;
+    background_b.y = 0;
+    background_f.x = 0;
+    background_f.y = 0;
+    stage.addChild(background_b);
+    init_clouds();
+    stage.addChild(background_f);
 }
 
 
@@ -505,13 +525,11 @@ function beginning_of_game() {
     
     // preload textures to prevent popping
     loader = PIXI.loader
+            .add('cloud', 'images/clouds.png')
 			.add('tower0', 'images/tower.png')
 			.add('tower1', 'images/tower2.png')
 			.add('tower2', 'images/tower3.png')
 			.add('tower3', 'images/tower4.png')
-			.once('complete', function(loader, resources) {
-				init();
-			})
 			.load();
     
     
@@ -553,6 +571,25 @@ function animate() {
     // render the container
     renderer.render(stage);
 }
+
+function init_clouds() {
+    // cloudGenerator height speed scale
+    stage.addChild(cloudGenerator(000, 1, 1));
+    stage.addChild(cloudGenerator(070, .8, .8));
+    stage.addChild(cloudGenerator(140, 0.6, .5));
+    stage.addChild(cloudGenerator(190, 0.4, .4));
+    stage.addChild(cloudGenerator(190, 0.4, .4));
+    stage.addChild(cloudGenerator(240, 0.2, .27));
+    stage.addChild(cloudGenerator(240, 0.2, .27));
+    stage.addChild(cloudGenerator(240, 0.2, .27));
+    stage.addChild(cloudGenerator(270, 0.14, .17));
+    stage.addChild(cloudGenerator(260, 0.14, .17));
+    stage.addChild(cloudGenerator(280, 0.14, .17));
+    stage.addChild(cloudGenerator(280, 0.14, .17));
+    stage.addChild(cloudGenerator(280, 0.14, .17));
+    stage.addChild(cloudGenerator(280, 0.14, .17));
+    }
+
 function game_button(){
     stage = new PIXI.Container();
     init_background();
@@ -570,7 +607,6 @@ function game_button(){
     init_robot();
     init_launch_button();
 }
-
 
 function start_screen(){
     stage = new PIXI.Container();
