@@ -487,15 +487,14 @@ function buttonGenerator_darknessHalved(color) {
 }
 
 window.onload = function(){
-    beginning_of_game()
+    renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
+    document.getElementById('game_wrapper').appendChild(renderer.view);
+    beginning_of_game();
 }
 
 function beginning_of_game() {
-    renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
-    document.getElementById('game_wrapper').appendChild(renderer.view);
-    // create the root of the scene graph
+
     stage = new PIXI.Container();
-    // init stage
     
     // preload textures to prevent popping
     loader = PIXI.loader
