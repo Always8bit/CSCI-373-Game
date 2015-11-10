@@ -398,8 +398,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="267.57312"
-     inkscape:cy="2152.9319"
+     inkscape:cx="531.8221"
+     inkscape:cy="309.96411"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -715,5 +715,37 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
        inkscape:export-filename="C:\Users\Joseph\Documents\SCHOOL\github\csci373game\CSCI-373-Game\images\backgroundbackground.png" />
+    <path
+       style="fill:#888888;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 123.40749,886.33874 c 139.40104,-7.071 232.33507,1.0102 190.91882,8.0812 -41.41626,7.0711 -39.39595,-5.0507 -80.81221,-2.0203 -41.41625,3.0305 -92.93402,1.0102 -126.26906,1.0102 -33.335026,0 -44.446706,-7.0711 -24.243656,-10.1015 20.203046,-3.0305 44.446716,2.0203 40.406106,3.0304 z"
+       id="path4241"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Joseph\Documents\SCHOOL\github\csci373game\CSCI-373-Game\images\clouds.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#888888;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 308.26539,764.11028 c 132.32998,-5.0507 160.61425,-23.2335 174.75639,-4.0406 14.14214,19.1929 68.69037,-2.0203 95.96449,0 27.27412,2.0203 52.52793,32.3249 9.09137,24.2437 -43.43655,-8.0812 -81.82235,-4.0406 -123.23861,-2.0203 -41.41625,2.0203 -88.89342,-7.0711 -122.22845,-4.0406 -33.33504,3.0304 -83.84267,3.0304 -70.71068,-7.0711 13.13198,-10.1015 36.36549,-7.0711 36.36549,-7.0711 z"
+       id="path4243"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Joseph\Documents\SCHOOL\github\csci373game\CSCI-373-Game\images\clouds.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#888888;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 77.950624,785.32348 c -93.944198,-13.132 -193.949304,-1.0101 -160.614269,20.2031 33.335031,21.21316 90.9137345,-12.1219 133.340149,3.0304 42.42641,15.15226 167.685306,21.21316 150.512706,2.0203 -17.17257,-19.1929 -52.52791,-38.3858 -81.82233,-28.2842 -29.294426,10.1015 -41.416256,3.0304 -41.416256,3.0304 z"
+       id="path4245"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Joseph\Documents\SCHOOL\github\csci373game\CSCI-373-Game\images\clouds.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#888888;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 668.32091,870.53144 c 113.16341,6.691 137.35101,30.7786 149.44482,5.3528 12.0938,-25.4258 58.74131,2.6764 82.06507,0 23.32375,-2.6764 44.91985,-42.8224 7.77459,-32.1168 -37.14524,10.7056 -69.97127,5.3528 -105.38884,2.6764 -35.41756,-2.6764 -76.01817,9.3674 -104.52498,5.3528 -28.50682,-4.0146 -71.69897,-4.0146 -60.46901,9.3674 11.22996,13.382 31.09835,9.3674 31.09835,9.3674 z"
+       id="path4243-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Joseph\Documents\SCHOOL\github\csci373game\CSCI-373-Game\images\clouds.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
