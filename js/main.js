@@ -620,15 +620,31 @@ function init_instructions(){
     stage.addChild(robot);
     
     instruction_box = new PIXI.Graphics();
-    instruction_box.x = 100;
-    instruction_box.y = 100;
+    instruction_box.x = 15;
+    instruction_box.y = 25;
     
     stage.addChild(instruction_box);
     
     instruction_box.beginFill(0x555444, 1.0);
     instruction_box.lineStyle(2, 0x000000, 1.0);
-    instruction_box.drawRect(0, 100, 30, 40);
+    instruction_box.drawRect(0, 0, 650, 500);
     
+    //instructions
+    var text = new PIXI.Text('There will be some stuff to click',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+
+    //positions of the text instructions
+//      text.set(20,20);
+//    text.x = 170;
+//    text.y = 150;
+//    text1.x = 150+10;
+//    text1.y = 200;
+//    text2.x = 150+20;
+//    text2.y = 300;
+    
+    
+    stage.addChild(text);
+    stage.addChild(text1);
+    stage.addChild(text2);
 
 }
 
