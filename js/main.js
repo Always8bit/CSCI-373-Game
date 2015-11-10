@@ -475,7 +475,6 @@ window.onload = function(){
    
     // start animating
     
-    //init_instructions();
     start_screen();
     
 
@@ -578,7 +577,7 @@ function init_instructions(){
     
     instruction_box.beginFill(0x555444, 1.0);
     instruction_box.lineStyle(2, 0x000000, 1.0);
-    instruction_box.drawRect(0, 100, eqb_w-30, eqb_h-.1);
+    instruction_box.drawRect(0, 100, 30, 40);
     
 
 }
