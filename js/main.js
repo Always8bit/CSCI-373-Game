@@ -642,10 +642,12 @@ function init_instructions(){
     text.x = 10;
     text.y = 100;
     
-    
+    stage.addChild(buttonGenerator(700, 150, 300, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
+
     stage.addChild(text);
     stage.addChild(text1);
     stage.addChild(text2);
-
+	
+	
 }
 
