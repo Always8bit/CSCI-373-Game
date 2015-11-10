@@ -36,7 +36,7 @@ var nl_w = 550;
 var nl_h = 1;
 
 // Equation Box Global Variables
-var eqb_w = 600;
+var eqb_w = 665;
 var eqb_h = 100;
 
 function numberLine_update() {
@@ -328,8 +328,8 @@ function init_target(){
             }
         });
     // move the sprite to its designated position
-    target.position.x = 522;
-    target.position.y = 90;
+    target.position.x = 585;
+    target.position.y = 75;
     target.anchor.set(0.5);
     stage.addChild(target);
 }
@@ -338,7 +338,7 @@ function init_target(){
   function init_launch_button() {
     //create launch button
        
-      stage.addChild(buttonGenerator(275, 40, 120, 50, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
+      stage.addChild(buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
   }
 
    function launch_activate() {
@@ -365,14 +365,6 @@ function lose_screen(){
     stage.addChild(lose_text);
 }
 
-
-
-function init_instructions() {
-    var basicText = new PIXI.Text('Place the target on the correct number on the numberline', {font : '23px Arial', fill : 0xFF000, align : 'center'});
-    basicText.x = 20;
-    basicText.y = 115;
-    stage.addChild(basicText);
-}
 
 function init_background() {
     background = PIXI.Sprite.fromImage('images/background1.png');
@@ -470,23 +462,22 @@ window.onload = function(){
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
-    init_missileDown();
+    //init_missileDown();
     init_numberLine();
     init_tower();
 	lives_left();
-	init_missile();
+	//init_missile();
     init_equationbox();
     init_numberLine();
     init_target();
     init_robot();
+    //init_launch_button();
    
-    init_launch_button();
     // start animating
     
-    //start_screen();
     //init_instructions();
+    start_screen();
     
-    animate();
 
 }
 
@@ -510,7 +501,23 @@ function animate() {
     // render the container
     renderer.render(stage);
 }
+function game_button(){
+    init_background();
+    init_problemGenerator();
+    problemGenerator.setDifficulty(0);
+    problemGenerator.generateNewProblem();
+    init_missileDown();
+    init_numberLine();
+    init_tower();
+	lives_left();
+	init_missile();
+    init_equationbox();
+    init_numberLine();
+    init_target();
+    init_robot();
+    init_launch_button();
 
+}
 function start_screen(){
     //Same Background
     background = PIXI.Sprite.fromImage('images/background1.png');
@@ -529,12 +536,15 @@ function start_screen(){
     robot.position.x= 100;
     robot.position.y=505;
     stage.addChild(robot);
+    animate();
 
-
+    /*color for font is (start color: #B2B6B8 & end color:#5D5F61)
+    fount at http://cooltext.com/Logo-Design-Skate
+    font size depends on length of word
+    */
+    stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
+    stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
     
-    stage.addChild(buttonGenerator(300, 140, 250, 50, 0xCC0000, 5, 0.3,'images/easy.png', launch_activate));
-    stage.addChild(buttonGenerator(300, 240, 250, 50, 0xCC0000, 5, 0.3,'images/med.png', launch_activate));
-    stage.addChild(buttonGenerator(300, 340, 250, 50, 0xCC0000, 5, 0.3,'images/diff.png', launch_activate));
 
 }
 
@@ -572,3 +582,4 @@ function init_instructions(){
     
 
 }
+
