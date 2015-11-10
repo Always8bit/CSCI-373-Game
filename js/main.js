@@ -235,7 +235,7 @@ function robot_attack(){
 function cloudGenerator(height, speed, scale) {
     var cloud = new PIXI.Sprite(PIXI.loader.resources.cloud.texture);
     cloud.anchor.set(0.5, 0.5);
-    cloud.position.x = Math.random()*1000;
+    cloud.position.x = Math.random()*1300;
     cloud.position.y = height;
     cloud.scale.set(scale, scale);
     setInterval(function() {
@@ -578,16 +578,6 @@ function init_clouds() {
     stage.addChild(cloudGenerator(070, .8, .8));
     stage.addChild(cloudGenerator(140, 0.6, .5));
     stage.addChild(cloudGenerator(190, 0.4, .4));
-    stage.addChild(cloudGenerator(190, 0.4, .4));
-    stage.addChild(cloudGenerator(240, 0.2, .27));
-    stage.addChild(cloudGenerator(240, 0.2, .27));
-    stage.addChild(cloudGenerator(240, 0.2, .27));
-    stage.addChild(cloudGenerator(270, 0.14, .17));
-    stage.addChild(cloudGenerator(260, 0.14, .17));
-    stage.addChild(cloudGenerator(280, 0.14, .17));
-    stage.addChild(cloudGenerator(280, 0.14, .17));
-    stage.addChild(cloudGenerator(280, 0.14, .17));
-    stage.addChild(cloudGenerator(280, 0.14, .17));
     }
 
 function game_button(){
