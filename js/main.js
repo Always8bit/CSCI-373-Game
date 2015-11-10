@@ -172,6 +172,11 @@ function init_tower() {
 
 // function between launches
 function soft_reset() {
+    // check if you've lost
+    if (lives <= 0) {
+        lose_screen();
+        return;
+    }
     problemGenerator.generateNewProblem();
     init_numberLine();
     init_equationbox();
@@ -342,11 +347,6 @@ function init_target(){
                 this.position.x = snap_object.x;
                 this.position.y = snap_object.y-15;
                 targetSnapped = 1;
-                if (snap_object.number == problemGenerator.answer) {
-                    //win_screen();
-                } else{
-                    //lose_screen();
-              }
             } else {
                 targetSnapped = 0;
             }
@@ -424,7 +424,9 @@ function buttonGenerator(x, y, width, height, color, elevation, speed, what, cli
     var button_top = new PIXI.Sprite(button_top_tex);
 
     var text_gfx = new PIXI.Sprite.fromImage(what);
-    text_gfx.anchor.set(-.1); 
+    text_gfx.anchor.set(0.5); 
+    text_gfx.x = width/2;
+    text_gfx.y = height/2;
     
     button_top.addChild(text_gfx);
     
@@ -506,6 +508,7 @@ function beginning_of_game() {
 				init();
 			})
 			.load();
+    
     
     init_background();
     init_problemGenerator();
