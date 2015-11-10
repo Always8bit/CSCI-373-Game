@@ -6,6 +6,7 @@ var renderer;
 
 // Object Variables
 var tower;
+var loader;
 var robot;
 var equationBox;
 var problemGenerator;
@@ -30,6 +31,7 @@ var robotIntervalVariable;
 var robotAnimationFrame;
 
 var lives;
+var lives_text;
 
 // Number Line Global Variables
 var nl_w = 550;
@@ -54,6 +56,7 @@ function numberLine_update() {
 }
 
 function init_numberLine() {
+    stage.removeChild(numberLine);
     numberLine = new PIXI.Graphics();
     numberLine.x = 50;
     numberLine.y = 555;
@@ -167,22 +170,39 @@ function init_tower() {
     stage.addChild(tower);
 }
 
+// function between launches
+function soft_reset() {
+    problemGenerator.generateNewProblem();
+    init_numberLine();
+    init_equationbox();
+    init_launch_button();
+    init_target();
+    init_robot();
+    init_missileDown();
+	init_missile();
+}
+
 function lives_left(){
-	var lives_text = new PIXI.Text(lives,{font: '28px Arial', fill: 0x000000, align : 
+    stage.removeChild(lives_text);
+	lives_text = new PIXI.Text(lives,{font: '28px Arial', fill: 0x000000, align : 
 'center'});
 	lives_text.x = 800;
 	lives_text.y = 425;
 	stage.addChild(lives_text);
+    if (lives == 2) tower.texture = PIXI.loader.resources.tower1.texture;
+    if (lives == 1) tower.texture = PIXI.loader.resources.tower2.texture;
+    if (lives == 0) tower.texture = PIXI.loader.resources.tower3.texture;
 }
 
 function init_robot() {
-    robot = PIXI.Sprite.fromImage('images/robot/1.png');
+    robot = PIXI.Sprite.fromImage('images/robot/idle/1.png');
     robot.position.x=-50;
     robot.position.y=500;
 	robotAnimation = 0;
     robotAnimationFrame = 0;
     stage.addChild(robot);
-    robotIntervalVariable = setInterval(robot_animationIdle, 100);
+    clearInterval(robotIntervalVariable);
+    robotIntervalVariable = setInterval(robot_animationIdle, 200);
 }
 
 
@@ -198,8 +218,11 @@ function robot_moveToPosition(){
 function robot_attack(){
 	if(robot.x <= 800){
 		robot.x += 10;
-		lives -= 1;
 	}
+    if(robot.x >= 800) {
+        lives--;
+        robotAnimation = 3;
+    }
 }
 
 function robot_selfDestruct(){
@@ -213,6 +236,7 @@ function robot_animationIdle() {
 }
 
 function init_missile() {
+    stage.removeChild(missile);
 	missile = PIXI.Sprite.fromImage('images/missile.png');
 	missile.position.x=770;
 	missile.position.y=225;
@@ -221,6 +245,7 @@ function init_missile() {
 }
 
 function init_missileDown(){
+    stage.removeChild(missileDown);
 	missileDown = PIXI.Sprite.fromImage('images/missile.png');
 	missileDown.rotation = 600;
 	missileDown.position.x=500;
@@ -240,14 +265,20 @@ function missile_moveOffscreen(){
     }
 }	
 
-function missileDown_moveOnscreen(){
+function missileDown_moveOnscreen(){    
 	if (missileDown.y <= 700){
 		missileDown.y += (missileDown.y+200+25)/17;
-	} else if (missileDown.y > 700){
+	} else if (missileDown.y > 700 && problemGenerator.answer != user_answer.number && missileAnimation != 0){
+		robotAnimation = 4;
+	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
 	} else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
+    
+    if (missileDown.y > 700)
+        missileAnimation = 0;
+    
 }	
 
 function equationBox_update() {
@@ -277,6 +308,7 @@ function equationBox_update() {
 
 /* Create the Box for Equations using PIXI graphics */
 function init_equationbox() {
+    stage.removeChild(equationBox);
     equationBox = new PIXI.Graphics();
     equationBox.x = 10;
     equationBox.y = 10;
@@ -285,6 +317,7 @@ function init_equationbox() {
 }
 
 function init_target(){
+    stage.removeChild(target);
     targetSnapped = 0;
     target = PIXI.Sprite.fromImage('images/target.png');
     target.interactive = true;
@@ -337,8 +370,9 @@ function init_target(){
   //initializes the launch sequence
   function init_launch_button() {
     //create launch button
-       
-      stage.addChild(buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate));
+    stage.removeChild(launch_button);
+    launch_button = buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate);
+    stage.addChild(launch_button);
   }
 
    function launch_activate() {
@@ -458,6 +492,18 @@ window.onload = function(){
     // create the root of the scene graph
     stage = new PIXI.Container();
     // init stage
+    
+    // preload textures to prevent popping
+    loader = PIXI.loader
+			.add('tower0', 'images/tower.png')
+			.add('tower1', 'images/tower2.png')
+			.add('tower2', 'images/tower3.png')
+			.add('tower3', 'images/tower4.png')
+			.once('complete', function(loader, resources) {
+				init();
+			})
+			.load();
+    
     init_background();
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
@@ -480,8 +526,6 @@ window.onload = function(){
 
 }
 
-
-
 function animate() {
     requestAnimationFrame(animate);
 	if(robotAnimation == 1){
@@ -490,9 +534,14 @@ function animate() {
         missile_moveOffscreen();
     } else if(robotAnimation == 3){
 		robot_selfDestruct();
+        robotAnimation = 5;
+        lives_left();
 	} else if(robotAnimation == 4){
 		robot_attack();
-	}
+	} else if (robotAnimation == 5) {
+        setTimeout(soft_reset, 1000);
+        robotAnimation = 6;
+    }
     
     if (missileAnimation == 1) {
         missileDown_moveOnscreen();
@@ -515,8 +564,9 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
-
 }
+
+
 function start_screen(){
     //Same Background
     background = PIXI.Sprite.fromImage('images/background1.png');
