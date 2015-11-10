@@ -627,16 +627,12 @@ function init_instructions(){
     instruction_box.drawRect(0, 0, 650, 500);
     
     //instructions
-    var text = new PIXI.Text('There will be some stuff to click',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+    var text = new PIXI.Text('Once the player clicks on the "Start" Button, the game will begin. \n A robot is coming to destroy your base and your goal is to solve the equation at the top of the screen \n in order to launch a missile and destroy the robot.',{font : '24px Times', fill : 0xEEE9E9, align : 'Left'});
 
     //positions of the text instructions
-//      text.set(20,20);
-//    text.x = 170;
-//    text.y = 150;
-//    text1.x = 150+10;
-//    text1.y = 200;
-//    text2.x = 150+20;
-//    text2.y = 300;
+
+    text.x = 100;
+    text.y = 100;
     
     
     stage.addChild(text);
