@@ -630,11 +630,11 @@ function init_instructions(){
     instruction_box.drawRect(0, 0, 650, 500);
     
     //instructions
-    var text = new PIXI.Text('Once the player clicks on the "Start" Button, the game will begin. \n A robot is coming to destroy your base and your goal is to solve the equation at the top of the screen \n in order to launch a missile and destroy the robot.',{font : '24px Times', fill : 0xEEE9E9, align : 'Left'});
+    var text = new PIXI.Text('Your Goal \n A robot is coming to destroy your base. You must solve \n the equation at the top of the screen in order to launch a missile \n and destroy the robot. \n\n How to Play \n  Once the player clicks on the "Start" Button, the game will begin. \n Click and drag the red target onto the correct answer \n in the number line, then click the "launch" button.',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
 
     //positions of the text instructions
 
-    text.x = 100;
+    text.x = 10;
     text.y = 100;
     
     
