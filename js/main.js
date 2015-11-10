@@ -487,6 +487,10 @@ function buttonGenerator_darknessHalved(color) {
 }
 
 window.onload = function(){
+    beginning_of_game()
+}
+
+function beginning_of_game() {
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
     // create the root of the scene graph
@@ -508,22 +512,15 @@ window.onload = function(){
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
-    //init_missileDown();
     init_numberLine();
     init_tower();
 	lives_left();
-	//init_missile();
     init_equationbox();
     init_numberLine();
     init_target();
     init_robot();
-    //init_launch_button();
-   
-    // start animating
     
     start_screen();
-    
-
 }
 
 function animate() {
@@ -550,6 +547,7 @@ function animate() {
     renderer.render(stage);
 }
 function game_button(){
+    stage = new PIXI.Container();
     init_background();
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
@@ -568,6 +566,7 @@ function game_button(){
 
 
 function start_screen(){
+    stage = new PIXI.Container();
     //Same Background
     background = PIXI.Sprite.fromImage('images/background1.png');
     background.x = 0;
@@ -593,14 +592,13 @@ function start_screen(){
     */
     stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
     stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
-    
-
 }
 
 /* Screen for instructions 
    Void function that creates a box with text instructions
 */
 function init_instructions(){
+    stage = new PIXI.Container();
     //Same Background
     background = PIXI.Sprite.fromImage('images/background1.png');
     background.x = 0;
@@ -628,7 +626,5 @@ function init_instructions(){
     instruction_box.beginFill(0x555444, 1.0);
     instruction_box.lineStyle(2, 0x000000, 1.0);
     instruction_box.drawRect(0, 100, 30, 40);
-    
-
 }
 
