@@ -15,6 +15,8 @@ var launch_button;
 var background;
 var user_answer;
 var instruction_box;
+var score;
+var score_box;
 
 // Missile Variables
 var missile;
@@ -262,6 +264,7 @@ function init_missileDown(){
 	stage.addChild(missileDown);
 }
 
+/* Moves the missile off screen*/
 function missile_moveOffscreen(){
 	if (missile.y >= -600){
 		missile.y -= (225-missile.y+5)/15;
@@ -270,6 +273,7 @@ function missile_moveOffscreen(){
     }
 }	
 
+/* Animates the missile downward movement*/
 function missileDown_moveOnscreen(){    
 	if (missileDown.y <= 700){
 		missileDown.y += (missileDown.y+200+25)/17;
@@ -286,6 +290,7 @@ function missileDown_moveOnscreen(){
     
 }	
 
+/* Updates the equationBox with a new equation */
 function equationBox_update() {
     equationBox.clear();
     // background box
@@ -311,7 +316,7 @@ function equationBox_update() {
     init_launch_button();
 }
 
-/* Create the Box for Equations using PIXI graphics */
+/* Create the Box for equations using PIXI graphics */
 function init_equationbox() {
     stage.removeChild(equationBox);
     equationBox = new PIXI.Graphics();
