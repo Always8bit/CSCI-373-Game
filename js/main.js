@@ -17,12 +17,11 @@ var launch_button;
 var background;
 var user_answer;
 var instruction_box;
-<<<<<<< Updated upstream
+
 var score;
 var score_box;
-=======
-//var lose;
->>>>>>> Stashed changes
+
+
 
 // Missile Variables
 var missile;
@@ -428,6 +427,10 @@ function lose_screen(){
     lose.x = WIDTH/2;
     lose.y = HEIGHT/2;
     stage.addChild(lose);
+    //main menu button at end of game
+     stage.addChild(buttonGenerator(375, 350, 250, 60, 0xCC0000, 5, 0.3,'images/startover.png', game_button));
+    //start over button
+    stage.addChild(buttonGenerator(375, 450, 250, 60, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
 }
 
 
@@ -528,6 +531,7 @@ window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
     beginning_of_game();
+    
 }
 
 function beginning_of_game() {
