@@ -3,6 +3,8 @@
 // Display Variables
 var stage;
 var renderer;
+var WIDTH = 1000;
+var HEIGHT = 600;
 
 // Object Variables
 var tower;
@@ -15,8 +17,12 @@ var launch_button;
 var background;
 var user_answer;
 var instruction_box;
+<<<<<<< Updated upstream
 var score;
 var score_box;
+=======
+//var lose;
+>>>>>>> Stashed changes
 
 // Missile Variables
 var missile;
@@ -412,11 +418,16 @@ function win_screen() {
 }
 
 function lose_screen(){
-    var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
-'center'});
-    lose_text.x = 440;
-    lose_text.y = 240;
-    stage.addChild(lose_text);
+    //var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
+//'center'});
+  //  lose_text.x = 440;
+    //lose_text.y = 240;
+    //stage.addChild(lose_text);
+    var lose = PIXI.Sprite.fromImage('images/lose.png');
+    lose.anchor.set(0.5);
+    lose.x = WIDTH/2;
+    lose.y = HEIGHT/2;
+    stage.addChild(lose);
 }
 
 
