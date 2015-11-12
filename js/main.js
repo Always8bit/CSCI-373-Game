@@ -3,6 +3,8 @@
 // Display Variables
 var stage;
 var renderer;
+var WIDTH = 1000;
+var HEIGHT = 600;
 
 // Object Variables
 var tower;
@@ -15,8 +17,11 @@ var launch_button;
 var background;
 var user_answer;
 var instruction_box;
+
 var score;
 var score_box;
+
+
 
 // Missile Variables
 var missile;
@@ -232,6 +237,21 @@ function robot_attack(){
     }
 }
 
+function cloudGenerator(height, speed, scale) {
+    var cloud = new PIXI.Sprite(PIXI.loader.resources.cloud.texture);
+    cloud.anchor.set(0.5, 0.5);
+    cloud.position.x = Math.random()*1300;
+    cloud.position.y = height;
+    cloud.scale.set(scale, scale);
+    setInterval(function() {
+        cloud.position.x += speed;
+        var left_edge = cloud.position.x - (cloud.width/2);
+        if (left_edge > 1000)
+            cloud.position.x = 0 - (cloud.width/2);
+    }, 20);
+    return cloud;   
+}
+
 function robot_selfDestruct(){
 	stage.removeChild(robot);
 }
@@ -397,19 +417,33 @@ function win_screen() {
 }
 
 function lose_screen(){
-    var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
-'center'});
-    lose_text.x = 440;
-    lose_text.y = 240;
-    stage.addChild(lose_text);
+    //var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
+//'center'});
+  //  lose_text.x = 440;
+    //lose_text.y = 240;
+    //stage.addChild(lose_text);
+    var lose = PIXI.Sprite.fromImage('images/lose.png');
+    lose.anchor.set(0.5);
+    lose.x = WIDTH/2;
+    lose.y = HEIGHT/2;
+    stage.addChild(lose);
+    //main menu button at end of game
+     stage.addChild(buttonGenerator(375, 350, 250, 60, 0xCC0000, 5, 0.3,'images/startover.png', game_button));
+    //start over button
+    stage.addChild(buttonGenerator(375, 450, 250, 60, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
 }
 
 
 function init_background() {
-    background = PIXI.Sprite.fromImage('images/background1.png');
-    background.x = 0;
-    background.y = 0;
-    stage.addChild(background);
+    background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+    background_f = PIXI.Sprite.fromImage('images/backgroundforeground.png');
+    background_b.x = 0;
+    background_b.y = 0;
+    background_f.x = 0;
+    background_f.y = 0;
+    stage.addChild(background_b);
+    init_clouds();
+    stage.addChild(background_f);
 }
 
 
@@ -497,6 +531,7 @@ window.onload = function(){
     renderer = PIXI.autoDetectRenderer(1000, 600,{backgroundColor : 0xEEEEEE});
     document.getElementById('game_wrapper').appendChild(renderer.view);
     beginning_of_game();
+    
 }
 
 function beginning_of_game() {
@@ -505,13 +540,11 @@ function beginning_of_game() {
     
     // preload textures to prevent popping
     loader = PIXI.loader
+            .add('cloud', 'images/clouds.png')
 			.add('tower0', 'images/tower.png')
 			.add('tower1', 'images/tower2.png')
 			.add('tower2', 'images/tower3.png')
 			.add('tower3', 'images/tower4.png')
-			.once('complete', function(loader, resources) {
-				init();
-			})
 			.load();
     
     
@@ -553,6 +586,15 @@ function animate() {
     // render the container
     renderer.render(stage);
 }
+
+function init_clouds() {
+    // cloudGenerator height speed scale
+    stage.addChild(cloudGenerator(000, 1, 1));
+    stage.addChild(cloudGenerator(070, .8, .8));
+    stage.addChild(cloudGenerator(140, 0.6, .5));
+    stage.addChild(cloudGenerator(190, 0.4, .4));
+    }
+
 function game_button(){
     stage = new PIXI.Container();
     init_background();
@@ -570,7 +612,6 @@ function game_button(){
     init_robot();
     init_launch_button();
 }
-
 
 function start_screen(){
     stage = new PIXI.Container();
@@ -642,7 +683,15 @@ function init_instructions(){
     text.x = 10;
     text.y = 100;
     
-    
+    stage.addChild(buttonGenerator(700, 150, 300, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
+
     stage.addChild(text);
+<<<<<<< HEAD
+=======
+    stage.addChild(text1);
+    stage.addChild(text2);
+	
+	
+>>>>>>> origin/master
 }
 
