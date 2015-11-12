@@ -1,3 +1,19 @@
+/* set interval usage */
+/*
+
+    function reduce_score() {
+        score -= 20;
+    }
+    setInterval(reduce_score, 20);
+
+    -- or --
+    
+    setInterval(function() {
+        score -= 20;
+    }, 20);
+
+*/
+
 // Remember to sync before making changes ^o^
 
 // Display Variables
@@ -221,7 +237,7 @@ function init_robot() {
 function robot_moveToPosition(){
 	if(robot.x <= numberLine_coordiniates(problemGenerator.answer).x-10)
     {
-        robot.x += 4;
+        robot.x += 8;
 	} else if (robotAnimation == 1) {
         robotAnimation = 2;
     }
@@ -229,7 +245,7 @@ function robot_moveToPosition(){
 
 function robot_attack(){
 	if(robot.x <= 800){
-		robot.x += 10;
+		robot.x += 8;
 	}
     if(robot.x >= 800) {
         lives--;
@@ -287,7 +303,7 @@ function init_missileDown(){
 /* Moves the missile off screen*/
 function missile_moveOffscreen(){
 	if (missile.y >= -600){
-		missile.y -= (225-missile.y+5)/15;
+		missile.y -= (225-missile.y+5)/17.5;
 	} else if (missileAnimation == 0) {
         missileAnimation = 1;
     }
@@ -296,7 +312,7 @@ function missile_moveOffscreen(){
 /* Animates the missile downward movement*/
 function missileDown_moveOnscreen(){    
 	if (missileDown.y <= 700){
-		missileDown.y += (missileDown.y+200+25)/17;
+		missileDown.y += (missileDown.y+200+25)/20;
 	} else if (missileDown.y > 700 && problemGenerator.answer != user_answer.number && missileAnimation != 0){
 		robotAnimation = 4;
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
