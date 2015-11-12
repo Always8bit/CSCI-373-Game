@@ -19,7 +19,7 @@ var user_answer;
 var instruction_box;
 
 var score;
-var score_box;
+var score_text;
 
 
 
@@ -686,12 +686,5 @@ function init_instructions(){
     stage.addChild(buttonGenerator(700, 150, 300, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
 
     stage.addChild(text);
-<<<<<<< HEAD
-=======
-    stage.addChild(text1);
-    stage.addChild(text2);
-	
-	
->>>>>>> origin/master
 }
 
