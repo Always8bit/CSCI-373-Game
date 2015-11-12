@@ -282,7 +282,7 @@ function init_missile() {
     stage.removeChild(missile);
 	missile = PIXI.Sprite.fromImage('images/missile.png');
 	missile.position.x=770;
-	missile.position.y=225;
+	missile.position.y=98;
 	stage.addChild(missile);
     missileAnimation = 0; 
 }
@@ -303,7 +303,7 @@ function init_missileDown(){
 /* Moves the missile off screen*/
 function missile_moveOffscreen(){
 	if (missile.y >= -600){
-		missile.y -= (225-missile.y+5)/17.5;
+		missile.y -= (98-missile.y+5)/17.5;
 	} else if (missileAnimation == 0) {
         missileAnimation = 1;
     }
