@@ -644,8 +644,5 @@ function init_instructions(){
     
     
     stage.addChild(text);
-    stage.addChild(text1);
-    stage.addChild(text2);
-
 }
 
