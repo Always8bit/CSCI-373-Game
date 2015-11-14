@@ -43,6 +43,7 @@ var score_text;
 var missile;
 var missileDown;
 var missileAnimation; // 0 init, 1 apex and ready to launch down, 2 xplodededed
+var missileFlames;
 
 // Target Variables
 var target;
@@ -284,7 +285,25 @@ function init_missile() {
 	missile.position.x=770;
 	missile.position.y=98;
 	stage.addChild(missile);
-    missileAnimation = 0; 
+    missileAnimation = 0;
+    missileFlames = animatedFlames(40, 135);
+    missile.addChild(missileFlames);
+    missile.addChild(PIXI.Sprite.fromImage('images/missile.png'));
+}
+
+// returns a flame sprite that animates
+function animatedFlames(x, y) {
+    var flames = PIXI.Sprite.fromImage('images/flame/0.png');
+    var flameFrame = 0;
+    setInterval(function() {
+        flames.texture = PIXI.Texture.fromImage("images/flame/" + flameFrame + ".png");
+        flameFrame++;
+        flameFrame = flameFrame%3;
+    }, 100);
+    flames.anchor.set(0.5, 0.0);
+    flames.position.x = x;
+    flames.position.y = y;
+    return flames;
 }
 
 function init_missileDown(){
