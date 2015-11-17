@@ -75,7 +75,7 @@ function init_numberLine() {
 }
 
 function numberLine_coordiniates(number) {
-    for (var i = 0; i < (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+    for (var i = 0; i <= (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
         var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
         var nl_num = i+problemGenerator.rangeBottom;
         var nl_x = (i/range)*nl_w + numberLine.x;
@@ -632,7 +632,7 @@ function game_button(){
     stage = new PIXI.Container();
     init_background();
     init_problemGenerator();
-    problemGenerator.setDifficulty(2);
+    problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
     init_missileDown();
     init_numberLine();
