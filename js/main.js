@@ -20,6 +20,7 @@ var background;
 var user_answer;
 var instruction_box;
 
+
 var score;
 var score_text;
 
@@ -41,7 +42,6 @@ var robotIntervalVariable;
 var robotAnimationFrame;
 
 var lives;
-var lives_text;
 
 // Number Line Global Variables
 var nl_w = 550;
@@ -75,7 +75,7 @@ function init_numberLine() {
 }
 
 function numberLine_coordiniates(number) {
-    for (var i = 0; i < (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
+    for (var i = 0; i <= (problemGenerator.rangeTop-problemGenerator.rangeBottom); i++) {
         var range = (problemGenerator.rangeTop-problemGenerator.rangeBottom);
         var nl_num = i+problemGenerator.rangeBottom;
         var nl_x = (i/range)*nl_w + numberLine.x;
@@ -128,33 +128,42 @@ function init_problemGenerator() {
         generateNewProblem: function() {
             // Difficulty 0
             if (this.difficulty == 0) {
-                // Answer ranges from -5 to +5
-                this.answer = (Math.floor(Math.random()*10))-5;
-                // First number deviates a max of 4 away +/-
-                this.num1   = (Math.floor(Math.random()*8))-4;
+                // Answer ranges from -3 to +3
+                this.answer = (Math.floor(Math.random()*6))-3;
+                // First number deviates a max of 3 away +/-
+                this.num1   = (Math.floor(Math.random()*6))-3;
                 // num1 + num2 = answer!
+                if (this.num1 < 2) {
+                    this.num1 = 2;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*2));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*2));
             }
             // Difficulty 1
             if (this.difficulty == 1) {
-                // Answer ranges from -20 to +20
-                this.answer = (Math.floor(Math.random()*40))-20;
-                // First number deviates a max of 10 away +/-
-                this.num1   = (Math.floor(Math.random()*10))-5;
+                // Answer ranges from -6 to +6
+                this.answer = (Math.floor(Math.random()*12))-6;
+                // First number deviates a max of 4 away +/-
+                this.num1   = (Math.floor(Math.random()*8))-4;
                 // num1 + num2 = answer!
+                if (this.num1 < 2) {
+                    this.num1 = 2;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
             }
             // Difficulty 2
             if (this.difficulty == 2) {
-                // Answer ranges from -40 to +40
-                this.answer = (Math.floor(Math.random()*80))-40;
-                // First number deviates a max of 16 away +/-
-                this.num1   = (Math.floor(Math.random()*80))-8;
+                // Answer ranges from -8 to +8
+                this.answer = (Math.floor(Math.random()*20))-10;
+                // First number deviates a max of 5 away +/-
+                this.num1   = (Math.floor(Math.random()*12))-6;
                 // num1 + num2 = answer!
+                if (this.num1 < 4) {
+                    this.num1 = 4;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
@@ -198,12 +207,6 @@ function soft_reset() {
 }
 
 function lives_left(){
-    stage.removeChild(lives_text);
-	lives_text = new PIXI.Text(lives,{font: '28px Arial', fill: 0x000000, align : 
-'center'});
-	lives_text.x = 800;
-	lives_text.y = 425;
-	stage.addChild(lives_text);
     if (lives == 2) tower.texture = PIXI.loader.resources.tower1.texture;
     if (lives == 1) tower.texture = PIXI.loader.resources.tower2.texture;
     if (lives == 0) tower.texture = PIXI.loader.resources.tower3.texture;
@@ -269,10 +272,11 @@ function init_missile() {
     stage.removeChild(missile);
 	missile = PIXI.Sprite.fromImage('images/missile.png');
 	missile.position.x=770;
-	missile.position.y=225;
+	missile.position.y=95;
 	stage.addChild(missile);
     missileAnimation = 0;
     missileFlames = animatedFlames(40, 135);
+    missileFlames.alpha = 0.0;
     missile.addChild(missileFlames);
     missile.addChild(PIXI.Sprite.fromImage('images/missile.png'));
 }
@@ -307,8 +311,9 @@ function init_missileDown(){
 
 /* Moves the missile off screen*/
 function missile_moveOffscreen(){
+    missileFlames.alpha = 1.0;
 	if (missile.y >= -600){
-		missile.y -= (225-missile.y+5)/17.5;
+		missile.y -= (95-missile.y+5)/17.5;
 	} else if (missileAnimation == 0) {
         missileAnimation = 1;
     }
@@ -455,8 +460,17 @@ function lose_screen(){
 }
 
 
-function init_background() {
-    background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+function init_background() { 
+  //  background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+    
+    if (problemGenerator.difficulty == 0) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+    } else if (problemGenerator.difficulty == 1) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundsky_day.png');
+    } else {
+        background_b = PIXI.Sprite.fromImage('images/backgroundsky_night.png');        
+    }
+    
     background_f = PIXI.Sprite.fromImage('images/backgroundforeground.png');
     background_b.x = 0;
     background_b.y = 0;
@@ -569,10 +583,8 @@ function beginning_of_game() {
 			.load();
     
     
-    init_background();
     init_problemGenerator();
-    problemGenerator.setDifficulty(0);
-    problemGenerator.generateNewProblem();
+    init_background();
     init_numberLine();
     init_tower();
 	lives_left();
@@ -617,10 +629,10 @@ function init_clouds() {
 
 function game_button(){
     stage = new PIXI.Container();
-    init_background();
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
+    init_background();
     init_missileDown();
     init_numberLine();
     init_tower();
@@ -631,8 +643,12 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
+
     score_reduced();
     
+
+    //init_score();
+
 }
 
 function start_screen(){
