@@ -128,33 +128,42 @@ function init_problemGenerator() {
         generateNewProblem: function() {
             // Difficulty 0
             if (this.difficulty == 0) {
-                // Answer ranges from -5 to +5
-                this.answer = (Math.floor(Math.random()*10))-5;
-                // First number deviates a max of 4 away +/-
-                this.num1   = (Math.floor(Math.random()*8))-4;
+                // Answer ranges from -3 to +3
+                this.answer = (Math.floor(Math.random()*6))-3;
+                // First number deviates a max of 3 away +/-
+                this.num1   = (Math.floor(Math.random()*6))-3;
                 // num1 + num2 = answer!
+                if (this.num1 < 2) {
+                    this.num1 = 2;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*2));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*2));
             }
             // Difficulty 1
             if (this.difficulty == 1) {
-                // Answer ranges from -20 to +20
-                this.answer = (Math.floor(Math.random()*40))-20;
-                // First number deviates a max of 10 away +/-
-                this.num1   = (Math.floor(Math.random()*10))-5;
+                // Answer ranges from -6 to +6
+                this.answer = (Math.floor(Math.random()*12))-6;
+                // First number deviates a max of 4 away +/-
+                this.num1   = (Math.floor(Math.random()*8))-4;
                 // num1 + num2 = answer!
+                if (this.num1 < 2) {
+                    this.num1 = 2;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
             }
             // Difficulty 2
             if (this.difficulty == 2) {
-                // Answer ranges from -40 to +40
-                this.answer = (Math.floor(Math.random()*80))-40;
-                // First number deviates a max of 16 away +/-
-                this.num1   = (Math.floor(Math.random()*80))-8;
+                // Answer ranges from -8 to +8
+                this.answer = (Math.floor(Math.random()*16))-8;
+                // First number deviates a max of 5 away +/-
+                this.num1   = (Math.floor(Math.random()*10))-5;
                 // num1 + num2 = answer!
+                if (this.num1 < 4) {
+                    this.num1 = 4;
+                }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
@@ -576,8 +585,6 @@ function beginning_of_game() {
     
     init_background();
     init_problemGenerator();
-    problemGenerator.setDifficulty(0);
-    problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
 	lives_left();
@@ -625,7 +632,7 @@ function game_button(){
     stage = new PIXI.Container();
     init_background();
     init_problemGenerator();
-    problemGenerator.setDifficulty(0);
+    problemGenerator.setDifficulty(2);
     problemGenerator.generateNewProblem();
     init_missileDown();
     init_numberLine();
