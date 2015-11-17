@@ -42,7 +42,6 @@ var robotIntervalVariable;
 var robotAnimationFrame;
 
 var lives;
-var lives_text;
 
 // Number Line Global Variables
 var nl_w = 550;
@@ -199,12 +198,6 @@ function soft_reset() {
 }
 
 function lives_left(){
-    stage.removeChild(lives_text);
-	lives_text = new PIXI.Text(lives,{font: '28px Arial', fill: 0x000000, align : 
-'center'});
-	lives_text.x = 800;
-	lives_text.y = 425;
-	stage.addChild(lives_text);
     if (lives == 2) tower.texture = PIXI.loader.resources.tower1.texture;
     if (lives == 1) tower.texture = PIXI.loader.resources.tower2.texture;
     if (lives == 0) tower.texture = PIXI.loader.resources.tower3.texture;
