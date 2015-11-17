@@ -340,16 +340,13 @@ function missileDown_moveOnscreen(){
         if (win_count == 15) {
             init_winScreen();
         }
-    
-    if (missileDown.y > 700) {
-        missileAnimation = 0;
-    }
     } else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
     
-   
-    
+    if (missileDown.y > 700)
+        missileAnimation = 0;
+
 }	
 
 /* Updates the equationBox with a new equation */
