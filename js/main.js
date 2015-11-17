@@ -1,18 +1,4 @@
-/* set interval usage */
-/*
 
-    function reduce_score() {
-        score -= 20;
-    }
-    setInterval(reduce_score, 20);
-
-    -- or --
-    
-    setInterval(function() {
-        score -= 20;
-    }, 20);
-
-*/
 
 // Remember to sync before making changes ^o^
 
@@ -283,7 +269,7 @@ function init_missile() {
     stage.removeChild(missile);
 	missile = PIXI.Sprite.fromImage('images/missile.png');
 	missile.position.x=770;
-	missile.position.y=98;
+	missile.position.y=225;
 	stage.addChild(missile);
     missileAnimation = 0;
     missileFlames = animatedFlames(40, 135);
@@ -322,7 +308,7 @@ function init_missileDown(){
 /* Moves the missile off screen*/
 function missile_moveOffscreen(){
 	if (missile.y >= -600){
-		missile.y -= (98-missile.y+5)/17.5;
+		missile.y -= (225-missile.y+5)/17.5;
 	} else if (missileAnimation == 0) {
         missileAnimation = 1;
     }
@@ -646,6 +632,8 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
+    init_score();
+    
 }
 
 function start_screen(){
@@ -723,3 +711,31 @@ function init_instructions(){
     stage.addChild(text);
 }
 
+/* set interval usage */
+
+
+    function reduce_score() {
+        score -= 20;
+    }
+    
+    //-- or --
+    /*
+    setInterval(function() {
+        score -= 20;
+    }, 20);
+*/
+
+/*
+function init_score(){
+    
+    stage.removeChild(score_text);
+    score = 10000;
+	score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
+'center'});
+	score_text.x = 800;
+	score_text.y = 50;
+    setInterval(reduce_score, 20);
+	stage.addChild(score_text);
+    
+}
+*/
