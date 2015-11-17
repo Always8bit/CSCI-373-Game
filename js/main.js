@@ -329,24 +329,26 @@ function missileDown_moveOnscreen(){
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
         win_count += 1;
-	} else if (missileAnimation == 1) {
+        if (win_count == 5) {
+            problemGenerator.setDifficulty(1);
+            lives = 3;
+        } else if (win_count == 10) {
+            problemGenerator.setDifficulty(2);
+            lives = 3;
+        }
+
+        if (win_count == 15) {
+            init_winScreen();
+        }
+    
+    if (missileDown.y > 700) {
+        missileAnimation = 0;
+    }
+    } else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
     
-    if (win_count == 5) {
-        problemGenerator.setDifficulty(1);
-        lives = 3;
-    } else if (win_count == 10) {
-        problemGenerator.setDifficulty(2);
-        lives = 3;
-    }
-    
-    if (win_count == 15) {
-        win_screen();
-    }
-    
-    if (missileDown.y > 700)
-        missileAnimation = 0;
+   
     
 }	
 
