@@ -20,11 +20,12 @@ var background;
 var user_answer;
 var instruction_box;
 
-
+//score
 var score;
 var score_text;
 
-
+//number of wins
+var win_count;
 
 // Missile Variables
 var missile;
@@ -327,8 +328,21 @@ function missileDown_moveOnscreen(){
 		robotAnimation = 4;
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
+        win_count += 1;
 	} else if (missileAnimation == 1) {
         missileAnimation = 2;
+    }
+    
+    if (win_count == 5) {
+        problemGenerator.setDifficulty(1);
+        lives = 3;
+    } else if (win_count == 10) {
+        problemGenerator.setDifficulty(2);
+        lives = 3;
+    }
+    
+    if (win_count == 15) {
+        win_screen();
     }
     
     if (missileDown.y > 700)
