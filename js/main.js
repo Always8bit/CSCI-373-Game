@@ -24,7 +24,8 @@ var instruction_box;
 var score;
 var score_text;
 
-
+var background_b;
+var background_f;
 
 // Missile Variables
 var missile;
@@ -197,12 +198,15 @@ function soft_reset() {
         return;
     }
     problemGenerator.generateNewProblem();
+    init_background();
+    init_tower();
     init_numberLine();
     init_equationbox();
     init_launch_button();
     init_target();
     init_robot();
     init_missileDown();
+    lives_left();
 	init_missile();
 }
 
@@ -461,12 +465,14 @@ function lose_screen(){
 
 
 function init_background() { 
-  //  background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+
+    stage.removeChild(background_b);
+    stage.removeChild(background_f);
     
     if (problemGenerator.difficulty == 0) {
-        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
-    } else if (problemGenerator.difficulty == 1) {
         background_b = PIXI.Sprite.fromImage('images/backgroundsky_day.png');
+    } else if (problemGenerator.difficulty == 1) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
     } else {
         background_b = PIXI.Sprite.fromImage('images/backgroundsky_night.png');        
     }
@@ -653,12 +659,7 @@ function game_button(){
 
 function start_screen(){
     stage = new PIXI.Container();
-    //Same Background
-    background = PIXI.Sprite.fromImage('images/background1.png');
-    background.x = 0;
-    background.y = 0;
-    stage.addChild(background);
-    
+    init_background();
   
     tower = PIXI.Sprite.fromImage('images/tower.png');
     tower.position.x=-165;
