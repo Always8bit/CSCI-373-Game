@@ -580,7 +580,6 @@ function beginning_of_game() {
     init_numberLine();
     init_target();
     init_robot();
-    
     start_screen();
 }
 
@@ -632,7 +631,7 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
-    init_score();
+    score_reduced();
     
 }
 
@@ -662,6 +661,7 @@ function start_screen(){
     font size depends on length of word
     */
     stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
+    
     stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
 }
 
@@ -714,28 +714,25 @@ function init_instructions(){
 /* set interval usage */
 
 
-    function reduce_score() {
-        score -= 20;
+   function reduce_score() {
+        score -= 1;
+        score_text.text = score;
     }
     
-    //-- or --
-    /*
-    setInterval(function() {
-        score -= 20;
-    }, 20);
-*/
 
-/*
 function init_score(){
-    
     stage.removeChild(score_text);
-    score = 10000;
-	score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
+    score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
 'center'});
 	score_text.x = 800;
 	score_text.y = 50;
-    setInterval(reduce_score, 20);
-	stage.addChild(score_text);
+    stage.addChild(score_text);
     
 }
-*/
+
+function score_reduced(){
+    score = 10000;
+    init_score();
+    setInterval(reduce_score,20);
+}
+
