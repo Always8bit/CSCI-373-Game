@@ -461,12 +461,11 @@ function lose_screen(){
 
 
 function init_background() { 
-  //  background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
     
     if (problemGenerator.difficulty == 0) {
-        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
-    } else if (problemGenerator.difficulty == 1) {
         background_b = PIXI.Sprite.fromImage('images/backgroundsky_day.png');
+    } else if (problemGenerator.difficulty == 1) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
     } else {
         background_b = PIXI.Sprite.fromImage('images/backgroundsky_night.png');        
     }
