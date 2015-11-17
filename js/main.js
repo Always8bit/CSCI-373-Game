@@ -270,10 +270,11 @@ function init_missile() {
     stage.removeChild(missile);
 	missile = PIXI.Sprite.fromImage('images/missile.png');
 	missile.position.x=770;
-	missile.position.y=225;
+	missile.position.y=95;
 	stage.addChild(missile);
     missileAnimation = 0;
     missileFlames = animatedFlames(40, 135);
+    missileFlames.alpha = 0.0;
     missile.addChild(missileFlames);
     missile.addChild(PIXI.Sprite.fromImage('images/missile.png'));
 }
@@ -308,8 +309,9 @@ function init_missileDown(){
 
 /* Moves the missile off screen*/
 function missile_moveOffscreen(){
+    missileFlames.alpha = 1.0;
 	if (missile.y >= -600){
-		missile.y -= (225-missile.y+5)/17.5;
+		missile.y -= (95-missile.y+5)/17.5;
 	} else if (missileAnimation == 0) {
         missileAnimation = 1;
     }
@@ -642,8 +644,7 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
-    init_score();
-    
+    //init_score();
 }
 
 function start_screen(){
