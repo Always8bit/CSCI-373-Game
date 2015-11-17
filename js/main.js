@@ -461,15 +461,15 @@ function lose_screen(){
 
 
 function init_background() { 
-    background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+  //  background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
     
-//    if (problemGenerator.difficulty == 0) {
-//        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
-//    } else if (problemGenerator.difficulty == 1) {
-//        background_b = PIXI.Sprite.fromImage('images/backgroundsky_day.png');
-//    } else {
-//        background_b = PIXI.Sprite.fromImage('images/backgroundsky_night.png');        
-//    }
+    if (problemGenerator.difficulty == 0) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundbackground.png');
+    } else if (problemGenerator.difficulty == 1) {
+        background_b = PIXI.Sprite.fromImage('images/backgroundsky_day.png');
+    } else {
+        background_b = PIXI.Sprite.fromImage('images/backgroundsky_night.png');        
+    }
     
     background_f = PIXI.Sprite.fromImage('images/backgroundforeground.png');
     background_b.x = 0;
@@ -583,8 +583,10 @@ function beginning_of_game() {
 			.load();
     
     
-    init_background();
     init_problemGenerator();
+    init_background();
+    problemGenerator.setDifficulty(0);
+    problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
 	lives_left();
@@ -630,8 +632,8 @@ function init_clouds() {
 
 function game_button(){
     stage = new PIXI.Container();
-    init_background();
     init_problemGenerator();
+    init_background();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
     init_missileDown();
