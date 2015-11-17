@@ -20,12 +20,15 @@ var background;
 var user_answer;
 var instruction_box;
 
-
+//score
 var score;
 var score_text;
 
 var background_b;
 var background_f;
+
+//number of wins
+var win_count;
 
 // Missile Variables
 var missile;
@@ -331,13 +334,25 @@ function missileDown_moveOnscreen(){
 		robotAnimation = 4;
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
-	} else if (missileAnimation == 1) {
+        win_count += 1;
+        if (win_count == 5) {
+            problemGenerator.setDifficulty(1);
+            lives = 3;
+        } else if (win_count == 10) {
+            problemGenerator.setDifficulty(2);
+            lives = 3;
+        }
+
+        if (win_count == 15) {
+            init_winScreen();
+        }
+    } else if (missileAnimation == 1) {
         missileAnimation = 2;
     }
     
     if (missileDown.y > 700)
         missileAnimation = 0;
-    
+
 }	
 
 /* Updates the equationBox with a new equation */
@@ -439,12 +454,6 @@ function init_target(){
   } 
 
 
-function win_screen() {
-    var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
-    win_text.x = 440;
-    win_text.y = 240;
-    stage.addChild(win_text);
-}
 
 function lose_screen(){
     //var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
@@ -465,7 +474,6 @@ function lose_screen(){
 
 
 function init_background() { 
-
     stage.removeChild(background_b);
     stage.removeChild(background_f);
     
@@ -716,7 +724,7 @@ function init_instructions(){
     instruction_box.drawRect(0, 0, 650, 500);
     
     //instructions
-    var text = new PIXI.Text('Your Goal \n A robot is coming to destroy your base. You must solve \n the equation at the top of the screen in order to launch a missile \n and destroy the robot. \n\n How to Play \n  Once the player clicks on the "Start" Button, the game will begin. \n Click and drag the red target onto the correct answer \n in the number line, then click the "launch" button.',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
+    var text = new PIXI.Text('',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
 
     //positions of the text instructions
 
@@ -745,6 +753,41 @@ function init_score(){
 	score_text.y = 50;
     stage.addChild(score_text);
     
+}
+
+function init_winScreen(){
+    stage = new PIXI.Container();
+    //Same Background
+    background = PIXI.Sprite.fromImage('images/background1.png');
+    background.x = 0;
+    background.y = 0;
+    stage.addChild(background);
+    
+  
+    tower = PIXI.Sprite.fromImage('images/tower.png');
+    tower.position.x=-165;
+    tower.position.y=261;
+	lives = 3;
+    stage.addChild(tower);
+    
+    robot.position.x= 800;
+    robot.position.y=250;
+    stage.addChild(robot);
+	
+	win = PIXI.Sprite.fromImage('images/youwin.png');
+	win.position.x=300;
+	win.position.y=75;
+	stage.addChild(win);
+    
+	var text = new PIXI.Text('Score:',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
+
+    text.x = 400;
+    text.y = 180;
+	
+	stage.addChild(buttonGenerator(380, 240, 250, 50, 0xCC0000, 5, 0.3,'images/replay.png', game_button));
+    stage.addChild(buttonGenerator(380, 340, 250, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
+
+    stage.addChild(text);
 }
 
 function score_reduced(){
