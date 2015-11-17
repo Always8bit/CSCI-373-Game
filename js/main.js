@@ -157,9 +157,9 @@ function init_problemGenerator() {
             // Difficulty 2
             if (this.difficulty == 2) {
                 // Answer ranges from -8 to +8
-                this.answer = (Math.floor(Math.random()*16))-8;
+                this.answer = (Math.floor(Math.random()*20))-10;
                 // First number deviates a max of 5 away +/-
-                this.num1   = (Math.floor(Math.random()*10))-5;
+                this.num1   = (Math.floor(Math.random()*12))-6;
                 // num1 + num2 = answer!
                 if (this.num1 < 4) {
                     this.num1 = 4;
@@ -585,8 +585,6 @@ function beginning_of_game() {
     
     init_problemGenerator();
     init_background();
-    problemGenerator.setDifficulty(0);
-    problemGenerator.generateNewProblem();
     init_numberLine();
     init_tower();
 	lives_left();
@@ -633,9 +631,9 @@ function init_clouds() {
 function game_button(){
     stage = new PIXI.Container();
     init_problemGenerator();
-    init_background();
     problemGenerator.setDifficulty(0);
     problemGenerator.generateNewProblem();
+    init_background();
     init_missileDown();
     init_numberLine();
     init_tower();
