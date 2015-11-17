@@ -449,12 +449,6 @@ function init_target(){
   } 
 
 
-function win_screen() {
-    var win_text = new PIXI.Text("You win!",{font : '28px Arial', fill : 0x000000, align : 'center'});
-    win_text.x = 440;
-    win_text.y = 240;
-    stage.addChild(win_text);
-}
 
 function lose_screen(){
     //var lose_text = new PIXI.Text("You Lose!", {font: '28px Arial', fill: 0x000000, align : 
