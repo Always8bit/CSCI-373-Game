@@ -401,7 +401,7 @@ function missileDown_moveOnscreen(){
             }, 1000);
         }
         if (win_count == 15) {
-            init_winScreen();
+            setTimeout(init_winScreen, 500);
         }
     } else if (missileAnimation == 1) {
         missileAnimation = 2;
@@ -847,7 +847,7 @@ function init_winScreen(){
     stage = new PIXI.Container();
     //Same Background
     
-    background = PIXI.Sprite.fromImage('images/background1.png');
+    background = PIXI.Sprite.fromImage('images/backgroundsky_night.png');
     background.x = 0;
     background.y = 0;
     stage.addChild(background);
@@ -858,10 +858,6 @@ function init_winScreen(){
     tower.position.y=261;
 	lives = 3;
     stage.addChild(tower);
-    
-    robot.position.x= 800;
-    robot.position.y=250;
-    stage.addChild(robot);
 	
 	win = PIXI.Sprite.fromImage('images/youwin.png');
 	win.position.x=300;
