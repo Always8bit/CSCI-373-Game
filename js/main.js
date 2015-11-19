@@ -212,6 +212,7 @@ function soft_reset() {
     init_missileDown();
     lives_left();
 	init_missile();
+    init_score();
 }
 
 function lives_left(){
@@ -244,7 +245,7 @@ function robot_moveToPosition(){
 function robot_attack(){
 	if(robot.x <= 800){
 		robot.x += 8;
-	}
+    }
     if(robot.x >= 800) {
         lives--;
         robotAnimation = 3;
@@ -335,6 +336,7 @@ function missileDown_moveOnscreen(){
 		robotAnimation = 4;
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
+        increment_score();
         win_count += 1;
         if (win_count == 5) {
             problemGenerator.setDifficulty(1);
@@ -353,7 +355,7 @@ function missileDown_moveOnscreen(){
     
     if (missileDown.y > 700)
         missileAnimation = 0;
-    score_update();
+    
 
 }	
 
@@ -448,13 +450,13 @@ function init_target(){
   }
 
    function launch_activate() {
-       
        //move robot to the right answer
        if (targetSnapped == 1) {
-            clearInterval(time);
             missileDown.x = target.x;
-            robotAnimation = 1; 
-       }
+            robotAnimation = 1;
+            clearInterval(time);
+            time = 0;
+        }
   } 
 
 
@@ -611,6 +613,7 @@ function beginning_of_game() {
     init_target();
     init_robot();
     start_screen();
+    
 }
 
 function animate() {
@@ -623,6 +626,7 @@ function animate() {
 		robot_selfDestruct();
         robotAnimation = 5;
         lives_left();
+        score_update();
 	} else if(robotAnimation == 4){
 		robot_attack();
 	} else if (robotAnimation == 5) {
@@ -662,7 +666,7 @@ function game_button(){
     init_robot();
     init_launch_button();
     score_update();
-
+    init_score();
 }
 
 function start_screen(){
@@ -776,19 +780,17 @@ function init_winScreen(){
 }
 
 // score stuff
-
-
 function score_update(){
-    init_score();
-    time = setInterval(reduce_score, 100);
+    time = setInterval(reduce_score, 100);      
 }
+
 
 function reduce_score() {
     score -= 1;
     score_text.text = score;
-    
 }
 
+    
 function increment_score(){
     score = score + 500;
     score_text.text = score;
@@ -797,12 +799,11 @@ function increment_score(){
 
 function init_score(){
     stage.removeChild(score_text);
-    score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
+    score_text = new PIXI.Text(score,{font: '42px Arial', fill: 0xCC0000, align : 
 'center'});
 	score_text.x = 800;
-	score_text.y = 50;
+	score_text.y = 30;
     stage.addChild(score_text);
-    
 }
 
 
