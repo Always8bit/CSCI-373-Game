@@ -26,7 +26,9 @@ var audio;
 //score
 var score = 10000;
 var score_text;
+var score_text_static;
 var time;
+var level_num;
 
 var background_b;
 var background_f;
@@ -220,6 +222,7 @@ function soft_reset() {
     lives_left();
 	init_missile();
     init_score();
+    init_levelnum();
 }
 
 function lives_left(){
@@ -688,6 +691,7 @@ function game_button(){
     init_launch_button();
     score_update();
     init_score();
+    init_levelnum();
 }
 
 function start_screen(){
@@ -836,16 +840,36 @@ function increment_score(){
     score = score + 500;
     score_text.text = score;
 }
+
+function init_levelnum() {
+    stage.removeChild(level_num);
+    var level = 1;
+    if (win_count >= 5)
+        level = 2;
+    if (win_count >= 10)
+        level = 3;
+    level_num = new PIXI.Text("Level: " + level + "-" + ((win_count%5) + 1),{font: '34px Impact', fill: 0xAAAAAA, align: 'left'});
+    level_num.x = 10;
+    level_num.y = 110;
+    level_num.style.stroke = "black";
+    level_num.style.strokeThickness = 4;
+    stage.addChild(level_num);
+}
     
 
 function init_score(){
     stage.removeChild(score_text);
-    score_text = new PIXI.Text(score,{font: '42px Arial', fill: 0xCC0000, align: 'left'});
-	score_text.x = 875;
-	score_text.y = 30;
-    var score_text_static = new PIXI.Text("SCORE: ",{font: '32px Impact', fill: 0xCC0000, align: 'center'});
-	score_text_static.x = 780;
-	score_text_static.y = 35;
+    stage.removeChild(score_text_static);
+    score_text = new PIXI.Text(score,{font: '42px Impact', fill: 0xCC0000, align: 'left'});
+	score_text.x = 105;
+	score_text.y = 145;
+    score_text_static = new PIXI.Text("SCORE: ",{font: '32px Impact', fill: 0xCC0000, align: 'center'});
+	score_text_static.x = 10;
+	score_text_static.y = 155;
+    score_text_static.style.stroke = "black";
+    score_text_static.style.strokeThickness = 3;
+    score_text.style.stroke = "black";
+    score_text.style.strokeThickness = 3;
     stage.addChild(score_text_static);
     stage.addChild(score_text);
 }
