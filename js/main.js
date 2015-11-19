@@ -387,14 +387,18 @@ function missileDown_moveOnscreen(){
             problemGenerator.setDifficulty(1);
             background_b.texture = PIXI.Texture.fromImage("images/backgroundbackground.png");
             lives = 3;
-            audio.src = 'music/level2.mp3'
-            audio.play();
+            setTimeout(function() {
+                audio.src = 'music/level2.mp3'
+                audio.play();
+            }, 1000);
         } else if (win_count == 10) {
             problemGenerator.setDifficulty(2);
             background_b.texture = PIXI.Texture.fromImage("images/backgroundsky_night.png");
             lives = 3;
-            audio.src = 'music/level3.mp3'
-            audio.play();
+            setTimeout(function() {
+                audio.src = 'music/level3.mp3'
+                audio.play();
+            }, 1000);
         }
         if (win_count == 15) {
             init_winScreen();
