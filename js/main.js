@@ -643,7 +643,7 @@ function beginning_of_game() {
     
     audio = new Audio("music/loader.mp3");
     audio.loop = true;
-    audio.volume = 0.6;
+    audio.volume = 0.45;
     audio.play();
     
     a_missile = new Audio("snd/missile.mp3");
@@ -905,7 +905,7 @@ function init_mute_button(x, y) {
     stage.removeChild(a_mute_button)
     a_mute_button = buttonGenerator(x, y, 58, 22, 0xCC0000, 3, 0.3, 'images/mute.png', function() {
         if (audio.volume == 0.0) {
-            audio.volume = 0.6;
+            audio.volume = 0.45;
             a_missile.volume = 0.4;
             a_explosion.volume = 0.8;
         } else {
