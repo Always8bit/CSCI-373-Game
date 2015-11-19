@@ -21,8 +21,9 @@ var user_answer;
 var instruction_box;
 
 //score
-var score;
+var score = 10000;
 var score_text;
+var time;
 
 var background_b;
 var background_f;
@@ -352,6 +353,7 @@ function missileDown_moveOnscreen(){
     
     if (missileDown.y > 700)
         missileAnimation = 0;
+    score_update();
 
 }	
 
@@ -439,17 +441,19 @@ function init_target(){
 
   //initializes the launch sequence
   function init_launch_button() {
-    //create launch button
+      //create launch button
     stage.removeChild(launch_button);
     launch_button = buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate);
     stage.addChild(launch_button);
   }
 
    function launch_activate() {
+       
        //move robot to the right answer
        if (targetSnapped == 1) {
+            clearInterval(time);
             missileDown.x = target.x;
-            robotAnimation = 1;           
+            robotAnimation = 1; 
        }
   } 
 
@@ -657,11 +661,7 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
-
-    score_reduced();
-    
-
-    //init_score();
+    score_update();
 
 }
 
@@ -739,21 +739,6 @@ function init_instructions(){
 /* set interval usage */
 
 
-   function reduce_score() {
-        score -= 1;
-        score_text.text = score;
-    }
-    
-
-function init_score(){
-    stage.removeChild(score_text);
-    score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
-'center'});
-	score_text.x = 800;
-	score_text.y = 50;
-    stage.addChild(score_text);
-    
-}
 
 function init_winScreen(){
     stage = new PIXI.Container();
@@ -790,9 +775,34 @@ function init_winScreen(){
     stage.addChild(text);
 }
 
-function score_reduced(){
-    score = 10000;
+// score stuff
+
+
+function score_update(){
     init_score();
-    setInterval(reduce_score,20);
+    time = setInterval(reduce_score, 100);
 }
+
+function reduce_score() {
+    score -= 1;
+    score_text.text = score;
+    
+}
+
+function increment_score(){
+    score = score + 500;
+    score_text.text = score;
+}
+    
+
+function init_score(){
+    stage.removeChild(score_text);
+    score_text = new PIXI.Text(score,{font: '28px Arial', fill: 0xCC0000, align : 
+'center'});
+	score_text.x = 800;
+	score_text.y = 50;
+    stage.addChild(score_text);
+    
+}
+
 
