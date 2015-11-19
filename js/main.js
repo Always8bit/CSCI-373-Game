@@ -20,6 +20,9 @@ var background;
 var user_answer;
 var instruction_box;
 
+//music
+var audio;
+
 //score
 var score = 10000;
 var score_text;
@@ -187,6 +190,7 @@ function init_problemGenerator() {
 }
 
 function init_tower() {
+    stage.removeChild(tower);
     tower = PIXI.Sprite.fromImage('images/tower.png');
     tower.position.x=-165;
     tower.position.y=261;
@@ -196,6 +200,8 @@ function init_tower() {
 
 // function between launches
 function soft_reset() {
+    if (win_count == 15)
+        return;
     // check if you've lost
     if (lives <= 0) {
         lose_screen();
@@ -343,10 +349,14 @@ function missileDown_moveOnscreen(){
             problemGenerator.setDifficulty(1);
             background_b.texture = PIXI.Texture.fromImage("images/backgroundbackground.png");
             lives = 3;
+            audio.src = 'music/level2.mp3'
+            audio.play();
         } else if (win_count == 10) {
             problemGenerator.setDifficulty(2);
             background_b.texture = PIXI.Texture.fromImage("images/backgroundsky_night.png");
             lives = 3;
+            audio.src = 'music/level3.mp3'
+            audio.play();
         }
         if (win_count == 15) {
             init_winScreen();
@@ -595,7 +605,14 @@ function beginning_of_game() {
 
     stage = new PIXI.Container();
     win_count = 0;
+    
+    audio = new Audio("music/loader.mp3");
+    audio.loop = true;
+    audio.volume = 0.6;
+    audio.play();
+    
     // preload textures to prevent popping
+    loader = PIXI.loader
     loader = PIXI.loader
             .add('cloud', 'images/clouds.png')
 			.add('tower0', 'images/tower.png')
@@ -632,9 +649,7 @@ function animate() {
 	} else if(robotAnimation == 4){
 		robot_attack();
 	} else if (robotAnimation == 5) {
-        if (win_count != 15) {
-            setTimeout(soft_reset, 1000);
-        }
+        setTimeout(soft_reset, 1000);
         robotAnimation = 6;
     }
     
@@ -654,6 +669,8 @@ function init_clouds() {
     }
 
 function game_button(){
+    audio.src = 'music/level1.mp3'
+    audio.play();
     stage = new PIXI.Container();
     init_problemGenerator();
     problemGenerator.setDifficulty(0);
@@ -675,6 +692,7 @@ function game_button(){
 
 function start_screen(){
     stage = new PIXI.Container();
+    problemGenerator.difficulty = 1; // background dusk
     init_background();
   
     tower = PIXI.Sprite.fromImage('images/tower.png');
@@ -688,14 +706,19 @@ function start_screen(){
     robot.position.y=505;
     stage.addChild(robot);
     animate();
-
+    
+    title_card = PIXI.Sprite.fromImage("images/titlecard.png");
+    title_card.x = 75;
+    title_card.y = 40;
+    stage.addChild(title_card);
+    
     /*color for font is (start color: #B2B6B8 & end color:#5D5F61)
     fount at http://cooltext.com/Logo-Design-Skate
     font size depends on length of word
     */
-    stage.addChild(buttonGenerator(300, 140, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
+    stage.addChild(buttonGenerator(300, 280, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
     
-    stage.addChild(buttonGenerator(240, 240, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
+    stage.addChild(buttonGenerator(240, 370, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
 }
 
 /* Screen for instructions 
@@ -751,7 +774,7 @@ function init_instructions(){
 function init_winScreen(){
     stage = new PIXI.Container();
     //Same Background
-    win_count = 0;
+    
     background = PIXI.Sprite.fromImage('images/background1.png');
     background.x = 0;
     background.y = 0;
@@ -773,13 +796,23 @@ function init_winScreen(){
 	win.position.y=75;
 	stage.addChild(win);
     
-	var text = new PIXI.Text('Score:',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
+	var text = new PIXI.Text("Score: " + score,{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
 
     text.x = 400;
     text.y = 180;
 	
-	stage.addChild(buttonGenerator(380, 240, 250, 50, 0xCC0000, 5, 0.3,'images/replay.png', game_button));
-    stage.addChild(buttonGenerator(380, 340, 250, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
+	stage.addChild(buttonGenerator(380, 240, 250, 50, 0xCC0000, 5, 0.3,'images/replay.png', function() {
+        win_count = 0;
+        audio.src = "music/level1.mp3";
+        audio.play();
+        game_button();
+    }));
+    stage.addChild(buttonGenerator(380, 340, 250, 50, 0xCC0000, 5, 0.3,'images/back.png', function() {
+        win_count = 0;
+        audio.src = "music/loader.mp3";
+        audio.play();
+        start_screen();
+    }));
 
     stage.addChild(text);
 }
@@ -788,7 +821,6 @@ function init_winScreen(){
 function score_update(){
     time = setInterval(reduce_score, 50);      
 }
-
 
 function reduce_score() {
     score -= 1;
@@ -808,10 +840,13 @@ function increment_score(){
 
 function init_score(){
     stage.removeChild(score_text);
-    score_text = new PIXI.Text(score,{font: '42px Arial', fill: 0xCC0000, align : 
-'center'});
+    score_text = new PIXI.Text(score,{font: '42px Arial', fill: 0xCC0000, align: 'left'});
 	score_text.x = 875;
 	score_text.y = 30;
+    var score_text_static = new PIXI.Text("SCORE: ",{font: '32px Impact', fill: 0xCC0000, align: 'center'});
+	score_text_static.x = 780;
+	score_text_static.y = 35;
+    stage.addChild(score_text_static);
     stage.addChild(score_text);
 }
 
