@@ -489,6 +489,8 @@ function lose_screen(){
   //  lose_text.x = 440;
     //lose_text.y = 240;
     //stage.addChild(lose_text);
+    clearInterval(time);
+    score = 10000;
     var lose = PIXI.Sprite.fromImage('images/lose.png');
     lose.anchor.set(0.5);
     lose.x = WIDTH/2;
@@ -810,6 +812,9 @@ function init_winScreen(){
 
     text.x = 400;
     text.y = 180;
+    
+    clearInterval(time);
+    score = 10000;
 	
 	stage.addChild(buttonGenerator(380, 240, 250, 50, 0xCC0000, 5, 0.3,'images/replay.png', function() {
         win_count = 0;
