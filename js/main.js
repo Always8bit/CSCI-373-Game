@@ -201,9 +201,10 @@ function soft_reset() {
         lose_screen();
         return;
     }
+    if (lives == 3) {
+        init_tower();
+    }
     problemGenerator.generateNewProblem();
-    init_background();
-    init_tower();
     init_numberLine();
     init_equationbox();
     init_launch_button();
@@ -337,15 +338,16 @@ function missileDown_moveOnscreen(){
 	} else if (missileDown.y > 700 && problemGenerator.answer == user_answer.number && missileAnimation != 0){
 		robotAnimation = 3;
         increment_score();
-        win_count += 1;
+        win_count++;
         if (win_count == 5) {
             problemGenerator.setDifficulty(1);
+            background_b.texture = PIXI.Texture.fromImage("images/backgroundbackground.png");
             lives = 3;
         } else if (win_count == 10) {
             problemGenerator.setDifficulty(2);
+            background_b.texture = PIXI.Texture.fromImage("images/backgroundsky_night.png");
             lives = 3;
         }
-
         if (win_count == 15) {
             init_winScreen();
         }
@@ -592,7 +594,7 @@ window.onload = function(){
 function beginning_of_game() {
 
     stage = new PIXI.Container();
-    
+    win_count = 0;
     // preload textures to prevent popping
     loader = PIXI.loader
             .add('cloud', 'images/clouds.png')
@@ -630,7 +632,9 @@ function animate() {
 	} else if(robotAnimation == 4){
 		robot_attack();
 	} else if (robotAnimation == 5) {
-        setTimeout(soft_reset, 1000);
+        if (win_count != 15) {
+            setTimeout(soft_reset, 1000);
+        }
         robotAnimation = 6;
     }
     
@@ -747,6 +751,7 @@ function init_instructions(){
 function init_winScreen(){
     stage = new PIXI.Container();
     //Same Background
+    win_count = 0;
     background = PIXI.Sprite.fromImage('images/background1.png');
     background.x = 0;
     background.y = 0;
