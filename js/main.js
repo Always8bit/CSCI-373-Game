@@ -648,7 +648,6 @@ function beginning_of_game() {
     setInterval(function() {
         requestAnimationFrame(animate);
     }, 15);
-    
 }
 
 function animate() {
@@ -811,9 +810,10 @@ function init_winScreen(){
 	win.position.y=75;
 	stage.addChild(win);
     
-	var text = new PIXI.Text("Score: " + score,{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
-
-    text.x = 400;
+	var text = new PIXI.Text("Score: " + score,{font : '32px Impact', fill: 0xEEE9E9, align : 'center'});
+    text.style.strokeThickness = 5;
+    text.style.stroke = "black";
+    text.x = 417;
     text.y = 180;
     
     clearInterval(time);
