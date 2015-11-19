@@ -781,7 +781,7 @@ function init_winScreen(){
 
 // score stuff
 function score_update(){
-    time = setInterval(reduce_score, 100);      
+    time = setInterval(reduce_score, 50);      
 }
 
 
@@ -790,7 +790,11 @@ function reduce_score() {
     score_text.text = score;
 }
 
-    
+function decrement_score(){
+    score = score - 500;
+    score_text.text = score;
+}
+ 
 function increment_score(){
     score = score + 500;
     score_text.text = score;
@@ -801,7 +805,7 @@ function init_score(){
     stage.removeChild(score_text);
     score_text = new PIXI.Text(score,{font: '42px Arial', fill: 0xCC0000, align : 
 'center'});
-	score_text.x = 800;
+	score_text.x = 875;
 	score_text.y = 30;
     stage.addChild(score_text);
 }
