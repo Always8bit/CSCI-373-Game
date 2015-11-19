@@ -24,6 +24,7 @@ var instruction_box;
 var audio;
 var a_missile;
 var a_explosion;
+var a_mute_button;
 
 //score
 var score = 10000;
@@ -228,6 +229,7 @@ function soft_reset() {
     init_numberLine();
     init_equationbox();
     init_launch_button();
+    init_mute_button(560, 25);
     init_target();
     init_robot();
     init_missileDown();
@@ -419,6 +421,7 @@ function equationBox_update() {
     equationBox.addChild(n1);
     equationBox.addChild(n2);
     init_launch_button();
+    init_mute_button(560, 25);
 }
 
 /* Create the Box for equations using PIXI graphics */
@@ -725,6 +728,7 @@ function game_button(){
     init_target();
     init_robot();
     init_launch_button();
+    init_mute_button(560, 25);
     score_update();
     init_score();
     init_levelnum();
@@ -758,6 +762,8 @@ function start_screen(){
     stage.addChild(buttonGenerator(300, 280, 195, 60, 0xCC0000, 5, 0.3,'images/start.png', game_button));
     
     stage.addChild(buttonGenerator(240, 370, 325, 50, 0xCC0000, 5, 0.3,'images/inst.png', init_instructions));
+    
+    init_mute_button(930, 568);
 }
 
 /* Screen for instructions 
@@ -893,6 +899,22 @@ function init_levelnum() {
     level_num.style.stroke = "black";
     level_num.style.strokeThickness = 4;
     stage.addChild(level_num);
+}
+
+function init_mute_button(x, y) {
+    stage.removeChild(a_mute_button)
+    a_mute_button = buttonGenerator(x, y, 58, 22, 0xCC0000, 3, 0.3, 'images/mute.png', function() {
+        if (audio.volume == 0.0) {
+            audio.volume = 0.6;
+            a_missile.volume = 0.4;
+            a_explosion.volume = 0.8;
+        } else {
+            audio.volume = 0.0;
+            a_missile.volume = 0.0;
+            a_explosion.volume = 0.0;
+        }
+    });
+    stage.addChild(a_mute_button);
 }
     
 
