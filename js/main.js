@@ -22,6 +22,8 @@ var instruction_box;
 
 //music
 var audio;
+var a_missile;
+var a_explosion;
 
 //score
 var score = 10000;
@@ -260,6 +262,11 @@ function robot_moveToPosition(){
         robot.x += 8;
 	} else if (robotAnimation == 1) {
         robotAnimation = 2;
+        setTimeout(function() {
+            a_missile.pause();
+            a_missile.currentTime = 0.0;
+            a_missile.play();
+        }, 100);
     }
 }
 
@@ -290,6 +297,9 @@ function cloudGenerator(height, speed, scale) {
 
 function robot_selfDestruct(){
 	stage.removeChild(robot);
+    a_explosion.pause();
+    a_explosion.currentTime = 0.0;
+    a_explosion.play();
 }
 
 function robot_animationIdle() {
@@ -475,21 +485,21 @@ function init_target(){
 
   //initializes the launch sequence
   function init_launch_button() {
-      //create launch button
-    stage.removeChild(launch_button);
-    launch_button = buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate);
-    stage.addChild(launch_button);
-  }
+          //create launch button
+        stage.removeChild(launch_button);
+        launch_button = buttonGenerator(275, 40, 220, 60, 0xCC0000, 5, 0.3, 'images/launch.png', launch_activate);
+        stage.addChild(launch_button);
+    }
 
    function launch_activate() {
        //move robot to the right answer
-       if (targetSnapped == 1) {
+       if (targetSnapped == 1 && robotAnimation == 0) {
             missileDown.x = target.x;
             robotAnimation = 1;
             clearInterval(time);
             time = 0;
         }
-  } 
+    }
 
 
 
@@ -632,6 +642,11 @@ function beginning_of_game() {
     audio.loop = true;
     audio.volume = 0.6;
     audio.play();
+    
+    a_missile = new Audio("snd/missile.mp3");
+    a_volume = 0.6;
+    a_explosion = new Audio("snd/explode.mp3");
+    a_explosion.volume = 0.6;
     
     // preload textures to prevent popping
     loader = PIXI.loader
