@@ -800,11 +800,12 @@ function init_instructions(){
     instruction_box.drawRect(0, 0, 650, 500);
     
     //instructions
-    var text = new PIXI.Text('',{font : '24px Times', fill : 0xEEE9E9, align : 'center'});
-
+    var text = new PIXI.Text('[-- Your Goal --]\n A horde of robots are coming to destroy your base. You must solve \n the equation at the top of the screen in order to launch a missile \n and destroy the oncoming fleet!\n\nThere are 3 levels with 5 problems in each one.\nSolve them all to declare victory over the robots!\n\n[-- How to Play --]\n  Once the player clicks on the "Start" Button, the game will begin. \n Click and drag the red target onto the correct answer \n on the number line and click the "launch" button.',{font : '24px Impact', fill : 0xEEE9E9, align : 'center'});
+    text.style.strokeThickness = 4;
+    text.style.stroke = "black";
     //positions of the text instructions
 
-    text.x = 10;
+    text.x = 14;
     text.y = 100;
     
     stage.addChild(buttonGenerator(700, 150, 300, 50, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
