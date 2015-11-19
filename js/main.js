@@ -223,6 +223,7 @@ function soft_reset() {
 	init_missile();
     init_score();
     init_levelnum();
+    score_update();
 }
 
 function lives_left(){
@@ -654,7 +655,6 @@ function animate() {
 		robot_selfDestruct();
         robotAnimation = 5;
         lives_left();
-        score_update();
 	} else if(robotAnimation == 4){
 		robot_attack();
 	} else if (robotAnimation == 5) {
