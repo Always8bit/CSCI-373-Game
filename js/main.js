@@ -852,6 +852,11 @@ function init_winScreen(){
     background.y = 0;
     stage.addChild(background);
     
+    background2 = PIXI.Sprite.fromImage('images/backgroundforeground.png');
+    background2.x = 0;
+    background2.y = 0;
+    stage.addChild(background2);
+    
   
     tower = PIXI.Sprite.fromImage('images/tower.png');
     tower.position.x=-165;
