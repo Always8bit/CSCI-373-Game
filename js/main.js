@@ -143,8 +143,11 @@ function init_problemGenerator() {
                 // First number deviates a max of 3 away +/-
                 this.num1   = (Math.floor(Math.random()*6))-3;
                 // num1 + num2 = answer!
-                if (this.num1 < 2) {
+                if (this.num1 < 2 && this.num1 >= 0) {
                     this.num1 = 2;
+                }
+                if (this.num1 > -2 && this.num1 < 0) {
+                    this.num1 = -2;
                 }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*2));
@@ -157,9 +160,13 @@ function init_problemGenerator() {
                 // First number deviates a max of 4 away +/-
                 this.num1   = (Math.floor(Math.random()*8))-4;
                 // num1 + num2 = answer!
-                if (this.num1 < 2) {
+                if (this.num1 < 2 && this.num1 >= 0) {
                     this.num1 = 2;
                 }
+                if (this.num1 > -2 && this.num1 < 0) {
+                    this.num1 = -2;
+                }
+
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
                 this.rangeTop    = Math.max(this.answer, this.num1, this.num2)+(Math.floor(Math.random()*4));
@@ -171,8 +178,11 @@ function init_problemGenerator() {
                 // First number deviates a max of 5 away +/-
                 this.num1   = (Math.floor(Math.random()*12))-6;
                 // num1 + num2 = answer!
-                if (this.num1 < 4) {
+                if (this.num1 < 4 && this.num1 >= 0) {
                     this.num1 = 4;
+                }
+                if (this.num1 > -4 && this.num1 < 0) {
+                    this.num1 = -4;
                 }
                 this.num2   = this.answer-this.num1;
                 this.rangeBottom = Math.min(this.answer, this.num1, this.num2)-(Math.floor(Math.random()*4));
