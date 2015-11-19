@@ -420,33 +420,39 @@ function init_target(){
     target
         // events for drag start
         .on('mousedown', function(event) {
-            this.data = event.data;
-            this.alpha = 0.5;
-            this.dragging = true;
+            if (robotAnimation == 0) {
+                this.data = event.data;
+                this.alpha = 0.5;
+                this.dragging = true;
+            }
         })
         // events for drag end
         .on('mouseup', function() {
-            this.alpha = 1;
-            this.dragging = false;
-            // set the interaction data to null
-            this.data = null;
-            var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
-            user_answer = snap_object;
-            if (snap_object != -1) {
-                this.position.x = snap_object.x;
-                this.position.y = snap_object.y-15;
-                targetSnapped = 1;
-            } else {
-                targetSnapped = 0;
+            if (robotAnimation == 0) {
+                this.alpha = 1;
+                this.dragging = false;
+                // set the interaction data to null
+                this.data = null;
+                var snap_object = numberLine_getClosestNumberPosition(this.position.x, this.position.y);
+                user_answer = snap_object;
+                if (snap_object != -1) {
+                    this.position.x = snap_object.x;
+                    this.position.y = snap_object.y-15;
+                    targetSnapped = 1;
+                } else {
+                    targetSnapped = 0;
+                }
             }
         })
         // events for drag move
         .on('mousemove', function() {
-            if (this.dragging)
-            {
-                var newPosition = this.data.getLocalPosition(this.parent);
-                this.position.x = newPosition.x;
-                this.position.y = newPosition.y;
+            if (robotAnimation == 0) {
+                if (this.dragging)
+                {
+                    var newPosition = this.data.getLocalPosition(this.parent);
+                    this.position.x = newPosition.x;
+                    this.position.y = newPosition.y;
+                }
             }
         });
     // move the sprite to its designated position
