@@ -649,7 +649,7 @@ function beginning_of_game() {
     a_missile = new Audio("snd/missile.mp3");
     a_missile.volume = 0.4;
     a_explosion = new Audio("snd/explode.mp3");
-    a_explosion.volume = 0.8;
+    a_explosion.volume = 0.6;
     
     // preload textures to prevent popping
     loader = PIXI.loader
@@ -907,7 +907,7 @@ function init_mute_button(x, y) {
         if (audio.volume == 0.0) {
             audio.volume = 0.45;
             a_missile.volume = 0.4;
-            a_explosion.volume = 0.8;
+            a_explosion.volume = 0.6;
         } else {
             audio.volume = 0.0;
             a_missile.volume = 0.0;
