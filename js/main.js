@@ -536,9 +536,19 @@ function lose_screen(){
     lose.y = HEIGHT/2;
     stage.addChild(lose);
     //main menu button at end of game
-     stage.addChild(buttonGenerator(375, 350, 250, 60, 0xCC0000, 5, 0.3,'images/startover.png', game_button));
+     stage.addChild(buttonGenerator(375, 350, 250, 60, 0xCC0000, 5, 0.3,'images/startover.png', function() {
+        win_count = 0;
+        audio.src = "music/level1.mp3";
+        audio.play();
+        game_button();
+     }));
     //start over button
-    stage.addChild(buttonGenerator(375, 450, 250, 60, 0xCC0000, 5, 0.3,'images/back.png', start_screen));
+    stage.addChild(buttonGenerator(375, 450, 250, 60, 0xCC0000, 5, 0.3,'images/back.png', function () {
+        win_count = 0;
+        audio.src = "music/loader.mp3";
+        audio.play();
+        start_screen();
+    }));
 }
 
 
