@@ -644,9 +644,9 @@ function beginning_of_game() {
     audio.play();
     
     a_missile = new Audio("snd/missile.mp3");
-    a_volume = 0.6;
+    a_missile.volume = 0.4;
     a_explosion = new Audio("snd/explode.mp3");
-    a_explosion.volume = 0.6;
+    a_explosion.volume = 0.8;
     
     // preload textures to prevent popping
     loader = PIXI.loader
