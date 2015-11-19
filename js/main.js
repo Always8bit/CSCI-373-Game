@@ -645,6 +645,10 @@ function beginning_of_game() {
     init_robot();
     start_screen();
     
+    setInterval(function() {
+        requestAnimationFrame(animate);
+    }, 15);
+    
 }
 
 function animate() {
@@ -717,9 +721,6 @@ function start_screen(){
     robot.position.x= 100;
     robot.position.y=505;
     stage.addChild(robot);
-    setInterval(function() {
-        requestAnimationFrame(animate);
-    }, 15);
     
     title_card = PIXI.Sprite.fromImage("images/titlecard.png");
     title_card.x = 75;
