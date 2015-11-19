@@ -302,6 +302,18 @@ function robot_selfDestruct(){
     a_explosion.pause();
     a_explosion.currentTime = 0.0;
     a_explosion.play();
+    var explodeeee = new PIXI.Sprite.fromImage('images/explosion.png');
+    explodeeee.anchor.set(0.5, 1.0);
+    explodeeee.position.x = robot.position.x;
+    explodeeee.position.y = robot.position.y+58;
+    var exp_alpha = setInterval(function() {
+        explodeeee.alpha -= 0.02;
+    }, 20);
+    setTimeout(function() {
+        clearInterval(exp_alpha);
+        stage.removeChild(explodeeee);
+    }, 2500);
+    stage.addChild(explodeeee);
 }
 
 function robot_animationIdle() {
