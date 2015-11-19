@@ -648,7 +648,7 @@ function beginning_of_game() {
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    
 	if(robotAnimation == 1){
         robot_moveToPosition();
 	} else if (robotAnimation == 2) {
@@ -717,7 +717,9 @@ function start_screen(){
     robot.position.x= 100;
     robot.position.y=505;
     stage.addChild(robot);
-    animate();
+    setInterval(function() {
+        requestAnimationFrame(animate);
+    }, 15);
     
     title_card = PIXI.Sprite.fromImage("images/titlecard.png");
     title_card.x = 75;
